@@ -15,21 +15,51 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: ColorTheme.bg,
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: ColorTheme.appBar, //transparent color
+          backgroundColor: ColorTheme.appBar,
           actions: [
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/images/profile.jpg'),
+            Stack(
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        IconDataTheme.notification,
+                        color: ColorTheme.black,
+                      )),
+                ),
+              ],
+            ),
+            InkWell(
+                onTap: () {
+                  print('fsdf');
+                },
+                child: buildProfileCircle()),
+            SizedBox(
+              width: 10,
             )
           ],
           leading: IconButton(
             splashColor: ColorTheme.splashColor,
             highlightColor: ColorTheme.highLightColor,
             icon: Icon(
-              IconDataTheme.leading,
-              color: ColorTheme.leading,
+              IconDataTheme.sort,
+              color: ColorTheme.black,
             ),
             onPressed: () {},
           )),
+    );
+  }
+
+  Widget buildProfileCircle() {
+    return Container(
+      width: SizeData.profileCircle,
+      height: SizeData.profileCircle,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage('assets/images/profile.jpg'))),
     );
   }
 }
