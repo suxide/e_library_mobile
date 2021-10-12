@@ -24,7 +24,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_remix: ^0.0.3
   google_fonts: ^2.1.0
+  sliding_clipped_nav_bar: ^1.0.3
 
 dev_dependencies:
   flutter_test:

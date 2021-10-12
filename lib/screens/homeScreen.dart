@@ -1,5 +1,6 @@
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,52 +13,27 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: ColorTheme.bg,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              pinned: true,
-              elevation: 0,
-              backgroundColor: ColorTheme.appBar,
-              actions: [
-                Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            IconDataTheme.notification,
-                            color: ColorTheme.black,
-                          )),
-                    ),
-                  ],
-                ),
-              ],
-              // leading: IconButton(
-              //   splashColor: ColorTheme.splashColor,
-              //   highlightColor: ColorTheme.highLightColor,
-              //   icon: Icon(
-              //     IconDataTheme.sort,
-              //     color: ColorTheme.black,
-              //   ),
-              //   onPressed: () {},
-              // )
-              leading: buildProfileCircle(),
+            buildSliverAppBar(),
+            SliverPadding(
+              padding: EdgeInsets.only(left: 15, top: 20),
+              sliver: SliverToBoxAdapter(
+                child: Text('New and Trending',
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: textThemeData(context)
+                            .textTheme
+                            .headline3!
+                            .fontSize)),
+              ),
             ),
             SliverToBoxAdapter(
               child: SizedBox(
-                height: 250,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 20),
-                  child: Text(
-                    'new book'.toUpperCase(),
-                    style: GoogleFonts.adventPro(
-                        fontSize: 35, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                height: 200,
               ),
             ),
             SliverToBoxAdapter(
@@ -65,82 +41,69 @@ class _HomeScreenState extends State<HomeScreen> {
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    height: 35,
+                    height: 60,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage('assets/images/shelf.png'))),
+                            image: AssetImage('assets/images/wood_shelf.png'))),
                   ),
                   Positioned(
-                    bottom: 20,
-                    left: 20,
+                    bottom: 60,
                     child: Container(
-                      height: 150,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/book1.jpg'))),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 20,
-                    left: 150,
-                    child: Container(
-                      height: 150,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/book2.jpg'))),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 20,
-                    right: 30,
-                    child: Container(
-                      height: 150,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/book3.jpg'))),
+                      height: 180,
+                      width: size.width,
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: InkWell(
+                              onTap: () {
+                                print('hello');
+                              },
+                              child: Container(
+                                width: 125,
+                                color: Colors.orange,
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: 5,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 70,
-              ),
-            ),
-            SliverFillRemaining(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color(0xffF7F7F5),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30))),
-              ),
-            )
           ],
         ),
       ),
     );
   }
 
-  Widget buildProfileCircle() {
-    return UnconstrainedBox(
-      child: Container(
-        width: SizeData.profileCircle,
-        height: SizeData.profileCircle,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/profile.jpg'))),
+  SliverAppBar buildSliverAppBar() {
+    return SliverAppBar(
+      backgroundColor: ColorTheme.appBar,
+      leading: IconButton(
+        splashColor: ColorTheme.splashColor,
+        highlightColor: ColorTheme.highLightColor,
+        icon: Icon(
+          IconDataTheme.user,
+          color: ColorTheme.black,
+        ),
+        onPressed: () {},
       ),
+      actions: [
+        IconButton(
+            splashColor: ColorTheme.splashColor,
+            highlightColor: ColorTheme.highLightColor,
+            onPressed: () {},
+            icon: Icon(
+              IconDataTheme.search,
+              color: ColorTheme.black,
+            ))
+      ],
     );
   }
 }

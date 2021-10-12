@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 class ColorTheme {
   //Color
@@ -7,6 +8,7 @@ class ColorTheme {
   static const Color black = Colors.black87;
   static const Color highLightColor = Colors.transparent;
   static const Color splashColor = Colors.white70;
+  static const Color white = Colors.white;
 }
 
 class SizeData {
@@ -16,6 +18,11 @@ class SizeData {
 
 class IconDataTheme {
   //Icon
-  static const IconData sort = Icons.sort_sharp;
-  static const IconData notification = Icons.notifications_none;
+  static const IconData user = FlutterRemix.user_line;
+  static const IconData notification = FlutterRemix.notification_2_fill;
+  static const IconData search = FlutterRemix.search_line;
+}
+
+textThemeData(BuildContext context) {
+  return Theme.of(context);
 }
