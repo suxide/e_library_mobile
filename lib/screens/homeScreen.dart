@@ -13,41 +13,58 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorTheme.bg,
-      appBar: AppBar(
-          elevation: 0,
-          backgroundColor: ColorTheme.appBar,
-          actions: [
-            Stack(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        IconDataTheme.notification,
-                        color: ColorTheme.black,
-                      )),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+              pinned: true,
+              elevation: 0,
+              backgroundColor: ColorTheme.appBar,
+              actions: [
+                Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            IconDataTheme.notification,
+                            color: ColorTheme.black,
+                          )),
+                    ),
+                  ],
                 ),
+                InkWell(
+                    onTap: () {
+                      print('fsdf');
+                    },
+                    child: buildProfileCircle()),
+                SizedBox(
+                  width: 10,
+                )
               ],
+              leading: IconButton(
+                splashColor: ColorTheme.splashColor,
+                highlightColor: ColorTheme.highLightColor,
+                icon: Icon(
+                  IconDataTheme.sort,
+                  color: ColorTheme.black,
+                ),
+                onPressed: () {},
+              )),
+          SliverPadding(
+            padding: EdgeInsets.only(top: 170),
+            sliver: SliverToBoxAdapter(
+              child: Container(
+                constraints: BoxConstraints(minHeight: 15),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/images/wood.png'))),
+              ),
             ),
-            InkWell(
-                onTap: () {
-                  print('fsdf');
-                },
-                child: buildProfileCircle()),
-            SizedBox(
-              width: 10,
-            )
-          ],
-          leading: IconButton(
-            splashColor: ColorTheme.splashColor,
-            highlightColor: ColorTheme.highLightColor,
-            icon: Icon(
-              IconDataTheme.sort,
-              color: ColorTheme.black,
-            ),
-            onPressed: () {},
-          )),
+          )
+        ],
+      ),
     );
   }
 
