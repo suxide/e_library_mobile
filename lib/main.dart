@@ -1,6 +1,5 @@
+import 'package:e_library_mobile/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
-
-import 'screens/homeScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +17,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: MainScreen(),
     );
   }
 }

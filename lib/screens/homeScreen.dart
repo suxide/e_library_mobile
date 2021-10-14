@@ -1,7 +1,9 @@
+import 'package:e_library_mobile/dataDemo.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: ColorTheme.bg,
       body: SafeArea(
         child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
           slivers: [
             buildSliverAppBar(),
             SliverPadding(
@@ -25,59 +28,123 @@ class _HomeScreenState extends State<HomeScreen> {
               sliver: SliverToBoxAdapter(
                 child: Text('New and Trending',
                     style: GoogleFonts.bebasNeue(
+                        color: ColorTheme.title,
                         fontSize: textThemeData(context)
                             .textTheme
                             .headline3!
                             .fontSize)),
               ),
             ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 200,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage('assets/images/wood_shelf.png'))),
-                  ),
-                  Positioned(
-                    bottom: 60,
-                    child: Container(
-                      height: 180,
-                      width: size.width,
-                      child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: InkWell(
-                              onTap: () {
-                                print('hello');
-                              },
-                              child: Container(
-                                width: 125,
-                                color: Colors.orange,
-                              ),
-                            ),
-                          );
-                        },
-                        itemCount: 5,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            buildHeight(30),
+            buildBookShelf(size),
+            buildHeight(100),
+            // SliverFillRemaining(
+            //   child: Column(
+            //     children: [
+            //       Expanded(
+            //         child: Container(
+            //           decoration: BoxDecoration(
+            //               color: ColorTheme.white,
+            //               borderRadius: BorderRadius.only(
+            //                   topLeft:
+            //                       Radius.circular(SizeData.audioBookRadius),
+            //                   topRight:
+            //                       Radius.circular(SizeData.audioBookRadius))),
+            //           // child: Column(
+            //           //   crossAxisAlignment: CrossAxisAlignment.start,
+            //           //   children: [
+            //           //     Padding(
+            //           //       padding: const EdgeInsets.all(20),
+            //           //       child: Row(
+            //           //         children: [
+            //           //           Text(
+            //           //             'Audio Book',
+            //           //             style: GoogleFonts.adamina(
+            //           //                 color: ColorTheme.title,
+            //           //                 fontSize: textThemeData(context)
+            //           //                     .textTheme
+            //           //                     .headline6!
+            //           //                     .fontSize),
+            //           //           ),
+            //           //           SizedBox(
+            //           //             width: 10,
+            //           //           ),
+            //           //           Icon(
+            //           //             FlutterRemix.headphone_fill,
+            //           //             color: ColorTheme.title,
+            //           //           )
+            //           //         ],
+            //           //       ),
+            //           //     ),
+            //           //   ],
+            //           // ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // )
+            SliverFillRemaining()
           ],
         ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter buildBookShelf(Size size) {
+    return SliverToBoxAdapter(
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            top: 200,
+            child: Container(
+              height: 60,
+              width: size.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/images/wood_shelf.png'))),
+            ),
+          ),
+          buildListViewTrendingBook(size),
+        ],
+      ),
+    );
+  }
+
+  SliverToBoxAdapter buildHeight(double height) {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: height,
+      ),
+    );
+  }
+
+  Container buildListViewTrendingBook(Size size) {
+    return Container(
+      height: 200,
+      width: size.width,
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: InkWell(
+              onTap: () {
+                print(index);
+              },
+              child: Container(
+                width: 140,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(books[index].pathImg))),
+              ),
+            ),
+          );
+        },
+        itemCount: books.length,
       ),
     );
   }
@@ -95,14 +162,17 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {},
       ),
       actions: [
-        IconButton(
-            splashColor: ColorTheme.splashColor,
-            highlightColor: ColorTheme.highLightColor,
-            onPressed: () {},
-            icon: Icon(
-              IconDataTheme.search,
-              color: ColorTheme.black,
-            ))
+        InkWell(
+          splashColor: ColorTheme.splashColor,
+          highlightColor: ColorTheme.highLightColor,
+          onTap: () {},
+          child: CircleAvatar(
+            backgroundImage: AssetImage('assets/images/profile.jpg'),
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        )
       ],
     );
   }

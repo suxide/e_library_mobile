@@ -8,12 +8,17 @@ class ColorTheme {
   static const Color black = Colors.black87;
   static const Color highLightColor = Colors.transparent;
   static const Color splashColor = Colors.white70;
-  static const Color white = Colors.white;
+  static const Color white = Color(0xffFEFCFB);
+  static const Color bottomActive = Colors.white;
+  static const Color bottomInactive = Colors.white38;
+  static const Color title = Color(0xff49372D);
+  static const Color bottomBar = Color(0xFFECBB5F);
 }
 
 class SizeData {
   //Size
   static const double profileCircle = 40;
+  static const double audioBookRadius = 40;
 }
 
 class IconDataTheme {
