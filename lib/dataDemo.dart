@@ -5,12 +5,12 @@ import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 import 'models/book.dart';
 
 List<Book> books = [
-  Book(name: 'A', pathImg: 'assets/images/book1.jpg'),
-  Book(name: 'B', pathImg: 'assets/images/book2.jpg'),
-  Book(name: 'C', pathImg: 'assets/images/book3.jpg'),
-  Book(name: 'D', pathImg: 'assets/images/book4.jpg'),
-  Book(name: 'E', pathImg: 'assets/images/book5.jpg'),
-  Book(name: 'F', pathImg: 'assets/images/book6.jpg'),
+  Book(name: 'A', pathImg: 'assets/images/b1.jpg'),
+  Book(name: 'B', pathImg: 'assets/images/b2.jpg'),
+  Book(name: 'C', pathImg: 'assets/images/b3.jpg'),
+  Book(name: 'D', pathImg: 'assets/images/b4.jpg'),
+  Book(name: 'E', pathImg: 'assets/images/b5.jpg'),
+  Book(name: 'F', pathImg: 'assets/images/b6.jpg'),
 ];
 
 List<BarItem> barItems = [
@@ -33,8 +33,14 @@ List<BarItem> barItems = [
 ];
 
 List<AudioBook> audioBooks = [
-  AudioBook(title: 'CD 1', imgPath: 'assets/images/cd1.png'),
-  AudioBook(title: 'CD 2', imgPath: 'assets/images/cd2.png'),
-  AudioBook(title: 'CD 3', imgPath: 'assets/images/cd3.png'),
-  AudioBook(title: 'CD 4', imgPath: 'assets/images/cd4.png'),
+  AudioBook(
+      title: 'មនុស្សពីរនាក់នៅផ្ទះជិតគ្នា', imgPath: 'assets/images/a1.jpg'),
+  AudioBook(title: 'ពាក្យសុភាសិតតំលៃ៣០តម្លឹង', imgPath: 'assets/images/a2.jpg'),
+  AudioBook(title: 'បុរសចេះថ្នាំពិសពស់', imgPath: 'assets/images/a3.jpg'),
+  AudioBook(
+      title: 'ខ្លាចាញ់ប្រាជ្ញាគីង្គក់និងអណ្ដើក',
+      imgPath: 'assets/images/a4.jpg'),
+  AudioBook(title: 'បងថ្លៃនិងប្អូនថ្លៃ', imgPath: 'assets/images/a5.jpg'),
+  AudioBook(
+      title: 'បុរសមានកូន៤នាក់រៀនវិជ្ជា៤បទ', imgPath: 'assets/images/a6.jpg'),
 ];

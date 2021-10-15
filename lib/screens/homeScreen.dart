@@ -3,6 +3,7 @@ import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:khmer_fonts/khmer_fonts.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,66 +25,137 @@ class _HomeScreenState extends State<HomeScreen> {
           slivers: [
             buildSliverAppBar(),
             SliverPadding(
-              padding: EdgeInsets.only(left: 15, top: 20),
+              padding: EdgeInsets.only(left: 15, top: 10),
               sliver: SliverToBoxAdapter(
-                child: Text('New and Trending',
-                    style: GoogleFonts.bebasNeue(
-                        color: ColorTheme.title,
-                        fontSize: textThemeData(context)
-                            .textTheme
-                            .headline3!
-                            .fontSize)),
+                child: Text(
+                  'សៀវភៅថ្មីៗ',
+                  style: TextStyle(
+                    fontFamily: KhmerFonts.koulen,
+                    color: ColorTheme.title,
+                    fontSize:
+                        textThemeData(context).textTheme.headline2!.fontSize,
+                    package: 'khmer_fonts',
+                  ),
+                ),
               ),
             ),
-            buildHeight(30),
+            buildHeight(10),
             buildBookShelf(size),
             buildHeight(100),
-            // SliverFillRemaining(
-            //   child: Column(
-            //     children: [
-            //       Expanded(
-            //         child: Container(
-            //           decoration: BoxDecoration(
-            //               color: ColorTheme.white,
-            //               borderRadius: BorderRadius.only(
-            //                   topLeft:
-            //                       Radius.circular(SizeData.audioBookRadius),
-            //                   topRight:
-            //                       Radius.circular(SizeData.audioBookRadius))),
-            //           // child: Column(
-            //           //   crossAxisAlignment: CrossAxisAlignment.start,
-            //           //   children: [
-            //           //     Padding(
-            //           //       padding: const EdgeInsets.all(20),
-            //           //       child: Row(
-            //           //         children: [
-            //           //           Text(
-            //           //             'Audio Book',
-            //           //             style: GoogleFonts.adamina(
-            //           //                 color: ColorTheme.title,
-            //           //                 fontSize: textThemeData(context)
-            //           //                     .textTheme
-            //           //                     .headline6!
-            //           //                     .fontSize),
-            //           //           ),
-            //           //           SizedBox(
-            //           //             width: 10,
-            //           //           ),
-            //           //           Icon(
-            //           //             FlutterRemix.headphone_fill,
-            //           //             color: ColorTheme.title,
-            //           //           )
-            //           //         ],
-            //           //       ),
-            //           //     ),
-            //           //   ],
-            //           // ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // )
-            SliverFillRemaining()
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  decoration: BoxDecoration(
+                      color: ColorTheme.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(SizeData.audioBookRadius),
+                          topRight: Radius.circular(SizeData.audioBookRadius))),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 30, left: 30, bottom: 15),
+                          child: Row(
+                            children: [
+                              Text(
+                                'សៀវភៅជាសម្លេង',
+                                style: TextStyle(
+                                  fontFamily: KhmerFonts.kantumruy,
+                                  color: ColorTheme.title,
+                                  fontSize: textThemeData(context)
+                                      .textTheme
+                                      .headline5!
+                                      .fontSize,
+                                  package: 'khmer_fonts',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(
+                                IconDataTheme.headphone,
+                                color: ColorTheme.title,
+                              )
+                            ],
+                          ),
+                        ),
+                        ...List.generate(
+                            audioBooks.length,
+                            (index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 75,
+                                        width: 75,
+                                        margin: EdgeInsets.only(left: 20),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                    audioBooks[index].imgPath)),
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey,
+                                                  blurRadius: 20,
+                                                  offset: Offset(10, 8),
+                                                  spreadRadius: 3),
+                                              BoxShadow(
+                                                  color: Colors.white,
+                                                  blurRadius: 20,
+                                                  offset: Offset(-3, -4),
+                                                  spreadRadius: -2)
+                                            ]),
+                                        child: UnconstrainedBox(
+                                          child: Container(
+                                            height: 20,
+                                            width: 20,
+                                            decoration: BoxDecoration(
+                                                color: Colors.black87
+                                                    .withOpacity(0.5),
+                                                shape: BoxShape.circle),
+                                            child: UnconstrainedBox(
+                                              child: Container(
+                                                height: 10,
+                                                width: 10,
+                                                decoration: BoxDecoration(
+                                                    color: ColorTheme.white,
+                                                    shape: BoxShape.circle),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            audioBooks[index].title,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              fontFamily: KhmerFonts.dangrek,
+                                              color: ColorTheme.title,
+                                              fontSize: textThemeData(context)
+                                                  .textTheme
+                                                  .headline6!
+                                                  .fontSize,
+                                              package: 'khmer_fonts',
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )),
+                        SizedBox(
+                          height: 50,
+                        )
+                      ]),
+                ),
+              ]),
+            ),
           ],
         ),
       ),

@@ -26,6 +26,7 @@ dependencies:
     sdk: flutter
   flutter_remix: ^0.0.3
   google_fonts: ^2.1.0
+  khmer_fonts: ^0.0.6
   sliding_clipped_nav_bar: ^1.0.3
 
 dev_dependencies:

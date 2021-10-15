@@ -26,8 +26,9 @@ class IconDataTheme {
   static const IconData user = FlutterRemix.user_line;
   static const IconData notification = FlutterRemix.notification_2_fill;
   static const IconData search = FlutterRemix.search_line;
+  static const IconData headphone = FlutterRemix.headphone_fill;
 }
 
-textThemeData(BuildContext context) {
+ThemeData textThemeData(BuildContext context) {
   return Theme.of(context);
 }
