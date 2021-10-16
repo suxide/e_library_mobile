@@ -24,6 +24,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_rating_stars: ^1.0.3+4
   flutter_remix: ^0.0.3
   google_fonts: ^2.1.0
   khmer_fonts: ^0.0.6

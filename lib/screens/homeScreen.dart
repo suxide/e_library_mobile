@@ -1,6 +1,7 @@
 import 'package:e_library_mobile/dataDemo.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:khmer_fonts/khmer_fonts.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double _starVal = 0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -42,6 +44,22 @@ class _HomeScreenState extends State<HomeScreen> {
             buildHeight(10),
             buildBookShelf(size),
             buildHeight(100),
+            SliverPadding(
+              padding: EdgeInsets.only(left: 20),
+              sliver: SliverToBoxAdapter(
+                child: Text(
+                  'ប្រភេទសៀវភៅ',
+                  style: TextStyle(
+                    fontFamily: KhmerFonts.koulen,
+                    color: ColorTheme.title,
+                    fontSize:
+                        textThemeData(context).textTheme.headline5!.fontSize,
+                    package: 'khmer_fonts',
+                  ),
+                ),
+              ),
+            ),
+            buildHeight(20),
             SliverList(
               delegate: SliverChildListDelegate([
                 Container(
@@ -128,7 +146,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
                                       Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             audioBooks[index].title,
@@ -143,6 +168,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   .fontSize,
                                               package: 'khmer_fonts',
                                             ),
+                                          ),
+                                          Text(
+                                            'អ្នកនិពន្ធ: លោក លីវ៉ាត់',
+                                            style: TextStyle(
+                                              fontFamily: KhmerFonts.hanuman,
+                                              color: ColorTheme.title,
+                                              fontSize: textThemeData(context)
+                                                  .textTheme
+                                                  .headline6!
+                                                  .fontSize,
+                                              package: 'khmer_fonts',
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          RatingStars(
+                                            starColor: ColorTheme.bottomBar,
+                                            valueLabelColor: ColorTheme.title,
+                                            maxValueVisibility: true,
+                                            valueLabelVisibility: true,
+                                            value: _starVal,
+                                            onValueChanged: (val) {
+                                              setState(() {
+                                                _starVal = val;
+                                              });
+                                            },
                                           )
                                         ],
                                       )
@@ -229,19 +281,19 @@ class _HomeScreenState extends State<HomeScreen> {
         highlightColor: ColorTheme.highLightColor,
         icon: Icon(
           IconDataTheme.user,
-          color: ColorTheme.black,
+          color: ColorTheme.title,
         ),
         onPressed: () {},
       ),
       actions: [
-        InkWell(
-          splashColor: ColorTheme.splashColor,
-          highlightColor: ColorTheme.highLightColor,
-          onTap: () {},
-          child: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/profile.jpg'),
-          ),
-        ),
+        IconButton(
+            splashColor: ColorTheme.splashColor,
+            highlightColor: ColorTheme.highLightColor,
+            onPressed: () {},
+            icon: Icon(
+              IconDataTheme.search,
+              color: ColorTheme.title,
+            )),
         SizedBox(
           width: 10,
         )

@@ -16,19 +16,19 @@ List<Book> books = [
 List<BarItem> barItems = [
   BarItem(
     icon: FlutterRemix.book_line,
-    title: 'Explore',
+    title: 'ថ្មីៗ',
   ),
   BarItem(
-    icon: FlutterRemix.search_2_line,
-    title: 'Search',
+    icon: FlutterRemix.user_2_line,
+    title: 'អ្នកនិពន្ធ',
   ),
   BarItem(
     icon: FlutterRemix.bookmark_3_line,
-    title: 'Bookmark',
+    title: 'រក្សាទុក',
   ),
   BarItem(
     icon: FlutterRemix.headphone_line,
-    title: 'Audio',
+    title: 'សំឡេង',
   ),
 ];
 
