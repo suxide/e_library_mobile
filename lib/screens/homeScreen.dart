@@ -44,22 +44,89 @@ class _HomeScreenState extends State<HomeScreen> {
             buildHeight(10),
             buildBookShelf(size),
             buildHeight(100),
-            SliverPadding(
-              padding: EdgeInsets.only(left: 20),
-              sliver: SliverToBoxAdapter(
-                child: Text(
-                  'ប្រភេទសៀវភៅ',
-                  style: TextStyle(
-                    fontFamily: KhmerFonts.koulen,
-                    color: ColorTheme.title,
-                    fontSize:
-                        textThemeData(context).textTheme.headline5!.fontSize,
-                    package: 'khmer_fonts',
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      'ប្រភេទសៀវភៅ',
+                      style: TextStyle(
+                        fontFamily: KhmerFonts.koulen,
+                        color: ColorTheme.title,
+                        fontSize: textThemeData(context)
+                            .textTheme
+                            .headline5!
+                            .fontSize,
+                        package: 'khmer_fonts',
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    height: 80,
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                            left: 15,
+                          ),
+                          width: 150,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              color: ColorTheme.title),
+                        );
+                      },
+                      itemCount: 10,
+                    ),
+                  )
+                ],
               ),
             ),
-            buildHeight(20),
+            buildHeight(30),
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      'អ្នកនិពន្ធ',
+                      style: TextStyle(
+                        fontFamily: KhmerFonts.koulen,
+                        color: ColorTheme.title,
+                        fontSize: textThemeData(context)
+                            .textTheme
+                            .headline5!
+                            .fontSize,
+                        package: 'khmer_fonts',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 80,
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                            left: 15,
+                          ),
+                          width: 80,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: ColorTheme.title),
+                        );
+                      },
+                      itemCount: 10,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            buildHeight(30),
             SliverList(
               delegate: SliverChildListDelegate([
                 Container(
