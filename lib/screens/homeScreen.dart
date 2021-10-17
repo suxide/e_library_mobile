@@ -1,4 +1,5 @@
 import 'package:e_library_mobile/dataDemo.dart';
+import 'package:e_library_mobile/screens/loginScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
@@ -388,7 +389,10 @@ class _HomeScreenState extends State<HomeScreen> {
           IconDataTheme.user,
           color: ColorTheme.title,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        },
       ),
       actions: [
         IconButton(

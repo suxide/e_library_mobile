@@ -14,6 +14,7 @@ class ColorTheme {
   static const Color title = Color(0xff49372D);
   static const Color bottomBar = Color(0xFFECBB5F);
   static const Color loginBg = Color(0xfffbecdd);
+  static const Color error = Colors.red;
 }
 
 class SizeData {
@@ -28,6 +29,9 @@ class IconDataTheme {
   static const IconData notification = FlutterRemix.notification_2_fill;
   static const IconData search = FlutterRemix.search_line;
   static const IconData headphone = FlutterRemix.headphone_fill;
+  static const IconData key = FlutterRemix.key_2_line;
+  static const IconData eye = FlutterRemix.eye_fill;
+  static const IconData eye_off = FlutterRemix.eye_off_fill;
 }
 
 ThemeData textThemeData(BuildContext context) {
