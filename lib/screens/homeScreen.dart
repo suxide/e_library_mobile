@@ -1,12 +1,12 @@
 import 'package:e_library_mobile/dataDemo.dart';
+import 'package:e_library_mobile/screens/bookDetailScreen.dart';
 import 'package:e_library_mobile/screens/loginScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:khmer_fonts/khmer_fonts.dart';
-import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,23 +28,31 @@ class _HomeScreenState extends State<HomeScreen> {
           slivers: [
             buildSliverAppBar(size),
             SliverPadding(
-              padding: EdgeInsets.only(left: 15, top: 10),
+              padding: EdgeInsets.only(left: 15, top: 0),
               sliver: SliverToBoxAdapter(
-                child: Text(
-                  'សៀវភៅថ្មីៗ',
-                  style: TextStyle(
-                    fontFamily: KhmerFonts.koulen,
-                    color: ColorTheme.title,
-                    fontSize:
-                        textThemeData(context).textTheme.headline2!.fontSize,
-                    package: 'khmer_fonts',
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'សៀវភៅថ្មីៗ',
+                      style: TextStyle(
+                        fontFamily: KhmerFonts.koulen,
+                        color: ColorTheme.title,
+                        fontSize: textThemeData(context)
+                            .textTheme
+                            .headline3!
+                            .fontSize,
+                        package: 'khmer_fonts',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            buildHeight(10),
+            buildSliverHeight(10),
             buildBookShelf(size),
-            buildHeight(100),
+            buildSliverHeight(100),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,37 +72,72 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 80,
-                    child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.only(
-                            left: 15,
-                          ),
-                          width: 150,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: ColorTheme.title),
-                        );
-                      },
-                      itemCount: 10,
+                  //Category
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                    ),
+                    child: Container(
+                      height: 60,
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(
+                              left: 15,
+                            ),
+                            constraints: BoxConstraints(minWidth: 150),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14),
+                                color: ColorTheme.title),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    bookCategory[index].icon,
+                                    color: ColorTheme.bg,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    bookCategory[index].name,
+                                    style: TextStyle(
+                                      fontFamily: KhmerFonts.siemreap,
+                                      color: ColorTheme.white,
+                                      fontSize: textThemeData(context)
+                                          .textTheme
+                                          .headline6!
+                                          .fontSize,
+                                      package: 'khmer_fonts',
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: bookCategory.length,
+                      ),
                     ),
                   )
                 ],
               ),
             ),
-            buildHeight(30),
+            buildSliverHeight(30),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  //Title
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Text(
-                      'អ្នកនិពន្ធ',
+                      'អ្នកនិពន្ធមានប្រជាប្រិយភាព',
                       style: TextStyle(
                         fontFamily: KhmerFonts.koulen,
                         color: ColorTheme.title,
@@ -106,28 +149,236 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  //Author
                   Container(
-                    height: 80,
+                    height: 180,
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.only(
-                            left: 15,
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, bottom: 10, top: 10),
+                          child: Container(
+                            margin:
+                                EdgeInsets.only(left: 10, right: 5, bottom: 10),
+                            width: 270,
+                            decoration: BoxDecoration(
+                                color: ColorTheme.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: ColorTheme.title.withOpacity(0.4),
+                                      blurRadius: 7,
+                                      offset: Offset(5, 7),
+                                      spreadRadius: 2),
+                                ]),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                      bookAuthors[index]
+                                                          .imgPath))),
+                                        ),
+                                      ),
+                                      Align(
+                                          alignment: Alignment.bottomLeft,
+                                          child: Container(
+                                              width: 35,
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                  color: index == 0
+                                                      ? ColorTheme.title
+                                                      : ColorTheme.bg),
+                                              child: Icon(
+                                                index == 0
+                                                    ? IconDataTheme.bookmarkSave
+                                                    : IconDataTheme
+                                                        .bookmarkUnSave,
+                                                color: index == 0
+                                                    ? ColorTheme.bottomBar
+                                                    : ColorTheme.title,
+                                              )))
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          bookAuthors[index].name,
+                                          style: TextStyle(
+                                            fontFamily: KhmerFonts.koulen,
+                                            color: ColorTheme.black,
+                                            fontSize: textThemeData(context)
+                                                .textTheme
+                                                .headline6!
+                                                .fontSize,
+                                            package: 'khmer_fonts',
+                                          ),
+                                        ),
+                                        Text(
+                                          'ថ្ងៃ ខែ ឆ្នាំ កំណើត: ០១ មករា ១៩៨៧',
+                                          style: TextStyle(
+                                            fontFamily: KhmerFonts.kantumruy,
+                                            color: ColorTheme.title,
+                                            fontSize: 13,
+                                            package: 'khmer_fonts',
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          'ខ្ញុំបាទឈ្មោះ ${bookAuthors[index].name} សព្វថ្ងៃនេះខ្ញុំមានអាយុ ១០០ ឆ្នាំ',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontFamily: KhmerFonts.content,
+                                            color: ColorTheme.title,
+                                            fontSize: 13,
+                                            package: 'khmer_fonts',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          width: 80,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: ColorTheme.title),
                         );
                       },
-                      itemCount: 10,
+                      itemCount: bookAuthors.length,
                     ),
                   )
                 ],
               ),
             ),
-            buildHeight(30),
+            buildSliverHeight(20),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Container(
+                  height: 500,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: ColorTheme.title.withOpacity(0.3),
+                            blurRadius: 10,
+                            offset: Offset(5, 10),
+                            spreadRadius: 1),
+                      ],
+                      color: ColorTheme.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(SizeData.audioBookRadius),
+                          bottomLeft:
+                              Radius.circular(SizeData.audioBookRadius))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              'សៀវភៅជាអក្សរ',
+                              style: TextStyle(
+                                fontFamily: KhmerFonts.kantumruy,
+                                color: ColorTheme.title,
+                                fontSize: textThemeData(context)
+                                    .textTheme
+                                    .headline6!
+                                    .fontSize,
+                                package: 'khmer_fonts',
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(FlutterRemix.book_2_fill)
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 170,
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(left: 10, top: 5),
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(
+                                          audioBooks[index].imgPath))),
+                            );
+                          },
+                          itemCount: audioBooks.length,
+                        ),
+                      ),
+                      //Popular book
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              'សៀវភៅជាអក្សរដែលមានប្រជាប្រិយភាព',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontFamily: KhmerFonts.kantumruy,
+                                color: ColorTheme.title,
+                                fontSize: textThemeData(context)
+                                    .textTheme
+                                    .headline6!
+                                    .fontSize,
+                                package: 'khmer_fonts',
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(FlutterRemix.book_2_fill)
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 170,
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(left: 10, top: 5),
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(books[index].pathImg))),
+                            );
+                          },
+                          itemCount: audioBooks.length,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            buildSliverHeight(30),
+            //Audio book
             SliverList(
               delegate: SliverChildListDelegate([
                 Container(
@@ -304,7 +555,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  SliverToBoxAdapter buildHeight(double height) {
+  SliverToBoxAdapter buildSliverHeight(double height) {
     return SliverToBoxAdapter(
       child: SizedBox(
         height: height,
@@ -324,11 +575,23 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: InkWell(
               onTap: () {
-                print(index);
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => BookDetailScreen(
+                              index: index,
+                            )));
               },
               child: Container(
                 width: 140,
                 decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: ColorTheme.title.withOpacity(0.5),
+                          blurRadius: 10,
+                          offset: Offset(7, 10),
+                          spreadRadius: 2),
+                    ],
                     image: DecorationImage(
                         fit: BoxFit.fill,
                         image: AssetImage(books[index].pathImg))),
@@ -344,7 +607,7 @@ class _HomeScreenState extends State<HomeScreen> {
   SliverAppBar buildSliverAppBar(Size size) {
     return SliverAppBar(
       backgroundColor: ColorTheme.appBar,
-      expandedHeight: 120,
+      expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
         background: Column(
           children: [

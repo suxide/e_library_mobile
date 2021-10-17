@@ -32,6 +32,9 @@ class IconDataTheme {
   static const IconData key = FlutterRemix.key_2_line;
   static const IconData eye = FlutterRemix.eye_fill;
   static const IconData eye_off = FlutterRemix.eye_off_fill;
+  static const IconData bookmarkSave = FlutterRemix.book_mark_fill;
+  static const IconData bookmarkUnSave = FlutterRemix.book_mark_line;
+  static const IconData download = FlutterRemix.download_cloud_2_line;
 }
 
 ThemeData textThemeData(BuildContext context) {
