@@ -29,6 +29,7 @@ dependencies:
   google_fonts: ^2.1.0
   khmer_fonts: ^0.0.6
   sliding_clipped_nav_bar: ^1.0.3
+  splash_screen_view: ^3.0.0
 
 dev_dependencies:
   flutter_test:

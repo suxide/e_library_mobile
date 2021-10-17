@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
-            buildSliverAppBar(),
+            buildSliverAppBar(size),
             SliverPadding(
               padding: EdgeInsets.only(left: 15, top: 10),
               sliver: SliverToBoxAdapter(
@@ -340,9 +340,47 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  SliverAppBar buildSliverAppBar() {
+  SliverAppBar buildSliverAppBar(Size size) {
     return SliverAppBar(
       backgroundColor: ColorTheme.appBar,
+      expandedHeight: 120,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Column(
+          children: [
+            UnconstrainedBox(
+              child: Container(
+                width: 45,
+                height: 60,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/images/logo.png'))),
+              ),
+            ),
+          ],
+        ),
+      ),
+      // expandedHeight: 200,
+      // flexibleSpace: FlexibleSpaceBar(
+      //   background: Column(
+      //     children: [
+      //       Container(
+      //         child: Container(
+      //           width: 70,
+      //           height: 70,
+      //           decoration: BoxDecoration(
+      //               image: DecorationImage(
+      //                   fit: BoxFit.contain,
+      //                   image: AssetImage('assets/images/logo.png'))),
+      //         ),
+      //       ),
+      //       Text(
+      //         'E-library',
+      //         style: TextStyle(fontSize: 70),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       leading: IconButton(
         splashColor: ColorTheme.splashColor,
         highlightColor: ColorTheme.highLightColor,

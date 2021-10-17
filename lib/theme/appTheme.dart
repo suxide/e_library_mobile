@@ -13,6 +13,7 @@ class ColorTheme {
   static const Color bottomInactive = Colors.white38;
   static const Color title = Color(0xff49372D);
   static const Color bottomBar = Color(0xFFECBB5F);
+  static const Color loginBg = Color(0xfffbecdd);
 }
 
 class SizeData {
