@@ -5,7 +5,6 @@ import 'package:e_library_mobile/screens/homeScreen.dart';
 import 'package:e_library_mobile/screens/searchScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {

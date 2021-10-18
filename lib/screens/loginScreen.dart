@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:e_library_mobile/responsive.dart';
 import 'package:e_library_mobile/screens/homeScreen.dart';
 import 'package:e_library_mobile/screens/mainScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';

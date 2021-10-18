@@ -1,6 +1,7 @@
 import 'package:e_library_mobile/dataDemo.dart';
 import 'package:e_library_mobile/screens/bookDetailScreen.dart';
 import 'package:e_library_mobile/screens/loginScreen.dart';
+import 'package:e_library_mobile/screens/splashScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   double _starVal = 0;
-
+  String _title = 'jflskdjflksdjflksdjfkjsdkfjsdfjksdjfkldsf';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -396,28 +397,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         //new popular audio book
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 30, left: 30, bottom: 15),
+                              top: 20, left: 30, bottom: 15),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                'សៀវភៅជាសម្លេងថ្មីៗ',
-                                style: TextStyle(
-                                  fontFamily: KhmerFonts.kantumruy,
-                                  color: ColorTheme.title,
-                                  fontSize: textThemeData(context)
-                                      .textTheme
-                                      .headline5!
-                                      .fontSize,
-                                  package: 'khmer_fonts',
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'សៀវភៅជាសម្លេងថ្មីៗ',
+                                      style: TextStyle(
+                                        fontFamily: KhmerFonts.kantumruy,
+                                        color: ColorTheme.title,
+                                        fontSize: textThemeData(context)
+                                            .textTheme
+                                            .headline5!
+                                            .fontSize,
+                                        package: 'khmer_fonts',
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              SizedBox(
-                                width: 10,
                               ),
                               Icon(
                                 IconDataTheme.headphone,
                                 color: ColorTheme.title,
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -526,37 +532,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
 
                         //popular audio book
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 30, left: 30, bottom: 15),
+                        Container(
+                          height: 100,
+                          color: Colors.red,
                           child: Row(
                             children: [
                               Expanded(
+                                flex: 3,
                                 child: Text(
                                   'សៀវភៅជាសម្លេងដែលមានប្រជាប្រិយភាព',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    fontFamily: KhmerFonts.kantumruy,
-                                    color: ColorTheme.title,
-                                    fontSize: textThemeData(context)
-                                        .textTheme
-                                        .headline5!
-                                        .fontSize,
-                                    package: 'khmer_fonts',
-                                  ),
+                                  style: TextStyle(fontSize: 30),
                                 ),
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Icon(
-                                IconDataTheme.headphone,
-                                color: ColorTheme.title,
-                              )
+                              Expanded(child: Icon(IconDataTheme.headphone))
                             ],
                           ),
                         ),
+                        // Icon(
+                        //           IconDataTheme.headphone,
+                        //           color: ColorTheme.title,
+                        //         )
                         ...List.generate(
                             audioBooks.length,
                             (index) => Padding(
@@ -794,7 +789,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         onPressed: () {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+              context, MaterialPageRoute(builder: (context) => SplashScreen()));
         },
       ),
       actions: [
