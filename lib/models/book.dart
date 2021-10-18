@@ -1,5 +1,5 @@
-class Book {
+class BookModel {
   final String name;
   final String pathImg;
-  Book({required this.name, required this.pathImg});
+  BookModel({required this.name, required this.pathImg});
 }

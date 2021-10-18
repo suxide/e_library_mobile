@@ -1,5 +1,5 @@
-class AudioBook {
+class AudioBookModel {
   final String title;
   final String imgPath;
-  AudioBook({required this.title, required this.imgPath});
+  AudioBookModel({required this.title, required this.imgPath});
 }
