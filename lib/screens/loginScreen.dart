@@ -114,13 +114,13 @@ class _LoginScreenState extends State<LoginScreen> {
         margin: EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
             // color: ColorTheme.bg.withOpacity(0.97),
-            color: ColorTheme.loginBg.withOpacity(0.9),
+            color: ColorTheme.loginBg.withOpacity(0.95),
             boxShadow: [
-              BoxShadow(
-                  color: ColorTheme.title.withOpacity(0.2),
-                  blurRadius: 10,
-                  offset: Offset(10, 5),
-                  spreadRadius: 2),
+              // BoxShadow(
+              //     color: ColorTheme.title.withOpacity(0.2),
+              //     blurRadius: 10,
+              //     offset: Offset(5, 5),
+              //     spreadRadius: 2),
             ],
             borderRadius: BorderRadius.circular(SizeData.audioBookRadius - 20)),
         child: ListView(

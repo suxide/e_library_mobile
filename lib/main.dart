@@ -2,6 +2,7 @@ import 'package:e_library_mobile/screens/loginScreen.dart';
 import 'package:e_library_mobile/screens/mainScreen.dart';
 import 'package:e_library_mobile/screens/splashScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainScreen(),
+      home: SplashScreen(),
     );
   }
 }

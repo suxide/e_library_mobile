@@ -9,7 +9,9 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:khmer_fonts/khmer_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   double _starVal = 0;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -390,13 +393,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        //new popular audio book
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 30, left: 30, bottom: 15),
                           child: Row(
                             children: [
                               Text(
-                                'សៀវភៅជាសម្លេង',
+                                'សៀវភៅជាសម្លេងថ្មីៗ',
                                 style: TextStyle(
                                   fontFamily: KhmerFonts.kantumruy,
                                   color: ColorTheme.title,
@@ -432,6 +436,142 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fit: BoxFit.cover,
                                                 image: AssetImage(
                                                     audioBooks[index].imgPath)),
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey,
+                                                  blurRadius: 20,
+                                                  offset: Offset(10, 8),
+                                                  spreadRadius: 3),
+                                              BoxShadow(
+                                                  color: Colors.white,
+                                                  blurRadius: 20,
+                                                  offset: Offset(-3, -4),
+                                                  spreadRadius: -2)
+                                            ]),
+                                        child: UnconstrainedBox(
+                                          child: Container(
+                                            height: 20,
+                                            width: 20,
+                                            decoration: BoxDecoration(
+                                                color: Colors.black87
+                                                    .withOpacity(0.5),
+                                                shape: BoxShape.circle),
+                                            child: UnconstrainedBox(
+                                              child: Container(
+                                                height: 10,
+                                                width: 10,
+                                                decoration: BoxDecoration(
+                                                    color: ColorTheme.white,
+                                                    shape: BoxShape.circle),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            audioBooks[index].title,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              fontFamily: KhmerFonts.dangrek,
+                                              color: ColorTheme.title,
+                                              fontSize: textThemeData(context)
+                                                  .textTheme
+                                                  .headline6!
+                                                  .fontSize,
+                                              package: 'khmer_fonts',
+                                            ),
+                                          ),
+                                          Text(
+                                            'អ្នកនិពន្ធ: លោក លីវ៉ាត់',
+                                            style: TextStyle(
+                                              fontFamily: KhmerFonts.hanuman,
+                                              color: ColorTheme.title,
+                                              fontSize: textThemeData(context)
+                                                  .textTheme
+                                                  .headline6!
+                                                  .fontSize,
+                                              package: 'khmer_fonts',
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          RatingStars(
+                                            starColor: ColorTheme.bottomBar,
+                                            valueLabelColor: ColorTheme.title,
+                                            maxValueVisibility: true,
+                                            valueLabelVisibility: true,
+                                            value: _starVal,
+                                            onValueChanged: (val) {
+                                              setState(() {
+                                                _starVal = val;
+                                              });
+                                            },
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )),
+
+                        //popular audio book
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 30, left: 30, bottom: 15),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'សៀវភៅជាសម្លេងដែលមានប្រជាប្រិយភាព',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    fontFamily: KhmerFonts.kantumruy,
+                                    color: ColorTheme.title,
+                                    fontSize: textThemeData(context)
+                                        .textTheme
+                                        .headline5!
+                                        .fontSize,
+                                    package: 'khmer_fonts',
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(
+                                IconDataTheme.headphone,
+                                color: ColorTheme.title,
+                              )
+                            ],
+                          ),
+                        ),
+                        ...List.generate(
+                            audioBooks.length,
+                            (index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 75,
+                                        width: 75,
+                                        margin: EdgeInsets.only(left: 20),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                    books[index].pathImg)),
                                             shape: BoxShape.circle,
                                             boxShadow: [
                                               BoxShadow(

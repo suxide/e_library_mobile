@@ -2,6 +2,7 @@ import 'package:e_library_mobile/models/audioBook.dart';
 import 'package:e_library_mobile/models/bookAuthor.dart';
 import 'package:e_library_mobile/models/bookCategory.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
@@ -17,10 +18,7 @@ List<BookModel> books = [
 ];
 
 List<BarItem> barItems = [
-  BarItem(
-    icon: FlutterRemix.book_line,
-    title: 'ថ្មីៗ',
-  ),
+  BarItem(icon: FlutterRemix.book_line, title: 'ថ្មីៗ'),
   BarItem(
     icon: FlutterRemix.user_2_line,
     title: 'អ្នកនិពន្ធ',
