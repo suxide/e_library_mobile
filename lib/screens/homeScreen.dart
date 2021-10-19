@@ -532,26 +532,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
 
                         //popular audio book
-                        Container(
-                          height: 100,
-                          color: Colors.red,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: Text(
-                                  'សៀវភៅជាសម្លេងដែលមានប្រជាប្រិយភាព',
-                                  style: TextStyle(fontSize: 30),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'សៀវភៅជាសម្លេងដែលមានប្រជាប្រិយភាព',
+                                style: TextStyle(
+                                  fontFamily: KhmerFonts.kantumruy,
+                                  color: ColorTheme.title,
+                                  fontSize: textThemeData(context)
+                                      .textTheme
+                                      .headline5!
+                                      .fontSize,
+                                  package: 'khmer_fonts',
                                 ),
                               ),
-                              Expanded(child: Icon(IconDataTheme.headphone))
-                            ],
-                          ),
+                            ),
+                            Icon(
+                              IconDataTheme.headphone,
+                              color: ColorTheme.title,
+                            )
+                          ],
                         ),
-                        // Icon(
-                        //           IconDataTheme.headphone,
-                        //           color: ColorTheme.title,
-                        //         )
+
                         ...List.generate(
                             audioBooks.length,
                             (index) => Padding(

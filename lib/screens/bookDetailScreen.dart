@@ -93,87 +93,92 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                     AssetImage(books[widget.index].pathImg))),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 10),
-                      child: ValueListenableBuilder(
-                        builder: (BuildContext context, bool _isFinishReading,
-                            Widget? child) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                audioBooks[widget.index].title,
-                                style: TextStyle(
-                                  fontFamily: KhmerFonts.bayon,
-                                  color: ColorTheme.title,
-                                  fontSize: textThemeData(context)
-                                      .textTheme
-                                      .headline5!
-                                      .fontSize,
-                                  package: 'khmer_fonts',
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 10),
+                        child: ValueListenableBuilder(
+                          builder: (BuildContext context, bool _isFinishReading,
+                              Widget? child) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  audioBooks[widget.index].title,
+                                  style: TextStyle(
+                                    fontFamily: KhmerFonts.bayon,
+                                    color: ColorTheme.title,
+                                    fontSize: textThemeData(context)
+                                        .textTheme
+                                        .headline5!
+                                        .fontSize,
+                                    package: 'khmer_fonts',
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'និពន្ធដោយ៖ ម៉ាន ម៉ាលីវ៉ាត់',
-                                style: TextStyle(
-                                  fontFamily: KhmerFonts.content,
-                                  color: ColorTheme.title,
-                                  fontSize: 15,
-                                  package: 'khmer_fonts',
+                                Text(
+                                  'និពន្ធដោយ៖ ម៉ាន ម៉ាលីវ៉ាត់',
+                                  style: TextStyle(
+                                    fontFamily: KhmerFonts.content,
+                                    color: ColorTheme.title,
+                                    fontSize: 15,
+                                    package: 'khmer_fonts',
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'និពន្ធឆ្នាំ៖ ២០២១',
-                                style: TextStyle(
-                                  fontFamily: KhmerFonts.content,
-                                  color: ColorTheme.title,
-                                  fontSize: 15,
-                                  package: 'khmer_fonts',
+                                Text(
+                                  'និពន្ធឆ្នាំ៖ ២០២១',
+                                  style: TextStyle(
+                                    fontFamily: KhmerFonts.content,
+                                    color: ColorTheme.title,
+                                    fontSize: 15,
+                                    package: 'khmer_fonts',
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                              Text(
-                                _isFinishReading
-                                    ? 'status: អានរួចរាល់'.toUpperCase()
-                                    : 'status: កំពុងអាន'.toUpperCase(),
-                                style: TextStyle(
-                                  fontFamily: KhmerFonts.content,
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorTheme.title,
-                                  fontSize: 17,
-                                  package: 'khmer_fonts',
+                                Spacer(),
+                                Text(
+                                  _isFinishReading
+                                      ? 'status: អានរួចរាល់'.toUpperCase()
+                                      : 'status: កំពុងអាន'.toUpperCase(),
+                                  style: TextStyle(
+                                    fontFamily: KhmerFonts.content,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorTheme.title,
+                                    fontSize: 17,
+                                    package: 'khmer_fonts',
+                                  ),
                                 ),
-                              ),
-                              ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.resolveWith(
-                                              (states) =>
-                                                  ColorTheme.bottomBar)),
-                                  onPressed: () {
-                                    _isFinishReadingVal.value =
-                                        !_isFinishReadingVal.value;
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 5, left: 20, right: 20),
-                                    child: Text(
-                                      _isFinishReading
-                                          ? 'មិនទាន់រួចរាល់'
-                                          : 'អានរួចរាល់',
-                                      style: TextStyle(
-                                        fontFamily: KhmerFonts.kantumruy,
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorTheme.title,
-                                        fontSize: 20,
-                                        package: 'khmer_fonts',
+                                ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.resolveWith(
+                                                (states) =>
+                                                    ColorTheme.bottomBar)),
+                                    onPressed: () {
+                                      _isFinishReadingVal.value =
+                                          !_isFinishReadingVal.value;
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5,
+                                          bottom: 5,
+                                          left: 20,
+                                          right: 20),
+                                      child: Text(
+                                        _isFinishReading
+                                            ? 'មិនទាន់រួចរាល់'
+                                            : 'អានរួចរាល់',
+                                        style: TextStyle(
+                                          fontFamily: KhmerFonts.kantumruy,
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorTheme.title,
+                                          fontSize: 20,
+                                          package: 'khmer_fonts',
+                                        ),
                                       ),
-                                    ),
-                                  ))
-                            ],
-                          );
-                        },
-                        valueListenable: _isFinishReadingVal,
+                                    ))
+                              ],
+                            );
+                          },
+                          valueListenable: _isFinishReadingVal,
+                        ),
                       ),
                     ),
                   ],
