@@ -152,118 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   //Author
-                  Container(
-                    height: 180,
-                    child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, bottom: 10, top: 10),
-                          child: Container(
-                            margin:
-                                EdgeInsets.only(left: 10, right: 5, bottom: 10),
-                            width: 270,
-                            decoration: BoxDecoration(
-                                color: ColorTheme.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: ColorTheme.title.withOpacity(0.4),
-                                      blurRadius: 7,
-                                      offset: Offset(5, 7),
-                                      spreadRadius: 2),
-                                ]),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                      bookAuthors[index]
-                                                          .imgPath))),
-                                        ),
-                                      ),
-                                      Align(
-                                          alignment: Alignment.bottomLeft,
-                                          child: Container(
-                                              width: 35,
-                                              height: 35,
-                                              decoration: BoxDecoration(
-                                                  color: index == 0
-                                                      ? ColorTheme.title
-                                                      : ColorTheme.bg),
-                                              child: Icon(
-                                                index == 0
-                                                    ? IconDataTheme.bookmarkSave
-                                                    : IconDataTheme
-                                                        .bookmarkUnSave,
-                                                color: index == 0
-                                                    ? ColorTheme.bottomBar
-                                                    : ColorTheme.title,
-                                              )))
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 4,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          bookAuthors[index].name,
-                                          style: TextStyle(
-                                            fontFamily: KhmerFonts.koulen,
-                                            color: ColorTheme.black,
-                                            fontSize: textThemeData(context)
-                                                .textTheme
-                                                .headline6!
-                                                .fontSize,
-                                            package: 'khmer_fonts',
-                                          ),
-                                        ),
-                                        Text(
-                                          'ថ្ងៃ ខែ ឆ្នាំ កំណើត: ០១ មករា ១៩៨៧',
-                                          style: TextStyle(
-                                            fontFamily: KhmerFonts.kantumruy,
-                                            color: ColorTheme.title,
-                                            fontSize: 13,
-                                            package: 'khmer_fonts',
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          'ខ្ញុំបាទឈ្មោះ ${bookAuthors[index].name} សព្វថ្ងៃនេះខ្ញុំមានអាយុ ១០០ ឆ្នាំ',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontFamily: KhmerFonts.content,
-                                            color: ColorTheme.title,
-                                            fontSize: 13,
-                                            package: 'khmer_fonts',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: bookAuthors.length,
-                    ),
-                  )
+                  buildPopularAuthor()
                 ],
               ),
             ),
@@ -315,59 +204,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      Container(
-                        height: 200,
-                        padding: EdgeInsets.only(left: 10),
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.only(
-                                  left: 10, top: 5, right: 5, bottom: 10),
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color:
-                                            ColorTheme.title.withOpacity(0.3),
-                                        blurRadius: 3,
-                                        offset: Offset(5, 2),
-                                        spreadRadius: 1),
-                                  ],
-                                  image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          audioBooks[index].imgPath))),
-                            );
-                          },
-                          itemCount: audioBooks.length,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                            onPressed: () {},
-                            child: UnconstrainedBox(
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'មើលទាំងអស់',
-                                    style: TextStyle(
-                                      fontFamily: KhmerFonts.kantumruy,
-                                      color: ColorTheme.title,
-                                      fontSize: 15,
-                                      package: 'khmer_fonts',
-                                    ),
-                                  ),
-                                  Icon(
-                                    IconDataTheme.seeAll,
-                                    color: ColorTheme.title,
-                                  )
-                                ],
-                              ),
-                            )),
-                      ),
+                      buildNewTextBook(),
+                      buildSeeAllTextBookButton(),
                       //Popular book
                       Padding(
                         padding:
@@ -396,58 +234,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      Container(
-                        height: 200,
-                        padding: EdgeInsets.only(left: 10),
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.only(
-                                  left: 10, top: 5, right: 5, bottom: 10),
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color:
-                                            ColorTheme.title.withOpacity(0.3),
-                                        blurRadius: 3,
-                                        offset: Offset(5, 2),
-                                        spreadRadius: 1),
-                                  ],
-                                  image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(books[index].pathImg))),
-                            );
-                          },
-                          itemCount: audioBooks.length,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                            onPressed: () {},
-                            child: UnconstrainedBox(
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'មើលទាំងអស់',
-                                    style: TextStyle(
-                                      fontFamily: KhmerFonts.kantumruy,
-                                      color: ColorTheme.title,
-                                      fontSize: 15,
-                                      package: 'khmer_fonts',
-                                    ),
-                                  ),
-                                  Icon(
-                                    IconDataTheme.seeAll,
-                                    color: ColorTheme.title,
-                                  )
-                                ],
-                              ),
-                            )),
-                      ),
+                      buildPopularTextBook(),
+                      buildSeeAllPopularButton(),
                     ],
                   ),
                 ),
@@ -495,164 +283,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        ...List.generate(
-                            audioBooks.length,
-                            (index) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 75,
-                                        width: 75,
-                                        margin: EdgeInsets.only(left: 20),
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: AssetImage(
-                                                    audioBooks[index].imgPath)),
-                                            shape: BoxShape.circle,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.grey,
-                                                  blurRadius: 20,
-                                                  offset: Offset(10, 8),
-                                                  spreadRadius: 3),
-                                              BoxShadow(
-                                                  color: Colors.white,
-                                                  blurRadius: 20,
-                                                  offset: Offset(-3, -4),
-                                                  spreadRadius: -2)
-                                            ]),
-                                        child: UnconstrainedBox(
-                                          child: Container(
-                                            height: 20,
-                                            width: 20,
-                                            decoration: BoxDecoration(
-                                                color: Colors.black87
-                                                    .withOpacity(0.5),
-                                                shape: BoxShape.circle),
-                                            child: UnconstrainedBox(
-                                              child: Container(
-                                                height: 10,
-                                                width: 10,
-                                                decoration: BoxDecoration(
-                                                    color: ColorTheme.white,
-                                                    shape: BoxShape.circle),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            audioBooks[index].title,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                              fontFamily: KhmerFonts.dangrek,
-                                              color: ColorTheme.title,
-                                              fontSize: textThemeData(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .fontSize,
-                                              package: 'khmer_fonts',
-                                            ),
-                                          ),
-                                          Text(
-                                            'អ្នកនិពន្ធ: លោក លីវ៉ាត់',
-                                            style: TextStyle(
-                                              fontFamily: KhmerFonts.hanuman,
-                                              color: ColorTheme.title,
-                                              fontSize: 15,
-                                              package: 'khmer_fonts',
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Icon(
-                                                IconDataTheme.star,
-                                                color: ColorTheme.title,
-                                                size: 20,
-                                              ),
-                                              Text(
-                                                '៣',
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      KhmerFonts.battambang,
-                                                  color: ColorTheme.title,
-                                                  fontSize: 15,
-                                                  package: 'khmer_fonts',
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                'ដាក់ពិន្ទុ',
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      KhmerFonts.battambang,
-                                                  color: ColorTheme.title,
-                                                  fontSize: 15,
-                                                  package: 'khmer_fonts',
-                                                ),
-                                              ),
-                                              Text(
-                                                '១០០ នាក់បានអាន',
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      KhmerFonts.battambang,
-                                                  color: ColorTheme.title,
-                                                  fontSize: 15,
-                                                  package: 'khmer_fonts',
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: UnconstrainedBox(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'មើលទាំងអស់',
-                                      style: TextStyle(
-                                        fontFamily: KhmerFonts.kantumruy,
-                                        color: ColorTheme.title,
-                                        fontSize: 15,
-                                        package: 'khmer_fonts',
-                                      ),
-                                    ),
-                                    Icon(
-                                      IconDataTheme.seeAll,
-                                      color: ColorTheme.title,
-                                    )
-                                  ],
-                                ),
-                              )),
-                        ),
+                        ...bulidPopularAudioBook(context),
+                        buildSeeAllPopularAudioBookButton(),
 
                         //popular audio book
                         Padding(
@@ -682,152 +314,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
 
-                        ...List.generate(
-                            audioBooks.length,
-                            (index) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 75,
-                                        width: 75,
-                                        margin: EdgeInsets.only(left: 20),
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: AssetImage(
-                                                    books[index].pathImg)),
-                                            shape: BoxShape.circle,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.grey,
-                                                  blurRadius: 20,
-                                                  offset: Offset(10, 8),
-                                                  spreadRadius: 3),
-                                              BoxShadow(
-                                                  color: Colors.white,
-                                                  blurRadius: 20,
-                                                  offset: Offset(-3, -4),
-                                                  spreadRadius: -2)
-                                            ]),
-                                        child: UnconstrainedBox(
-                                          child: Container(
-                                            height: 20,
-                                            width: 20,
-                                            decoration: BoxDecoration(
-                                                color: Colors.black87
-                                                    .withOpacity(0.5),
-                                                shape: BoxShape.circle),
-                                            child: UnconstrainedBox(
-                                              child: Container(
-                                                height: 10,
-                                                width: 10,
-                                                decoration: BoxDecoration(
-                                                    color: ColorTheme.white,
-                                                    shape: BoxShape.circle),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            audioBooks[index].title,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                              fontFamily: KhmerFonts.dangrek,
-                                              color: ColorTheme.title,
-                                              fontSize: textThemeData(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .fontSize,
-                                              package: 'khmer_fonts',
-                                            ),
-                                          ),
-                                          Text(
-                                            'អ្នកនិពន្ធ: លោក លីវ៉ាត់',
-                                            style: TextStyle(
-                                              fontFamily: KhmerFonts.hanuman,
-                                              color: ColorTheme.title,
-                                              fontSize: 15,
-                                              package: 'khmer_fonts',
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Icon(
-                                                IconDataTheme.star,
-                                                color: ColorTheme.title,
-                                                size: 20,
-                                              ),
-                                              Text(
-                                                '៤.៥',
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      KhmerFonts.battambang,
-                                                  color: ColorTheme.title,
-                                                  fontSize: 15,
-                                                  package: 'khmer_fonts',
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                'ដាក់ពិន្ទុ',
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      KhmerFonts.battambang,
-                                                  color: ColorTheme.title,
-                                                  fontSize: 15,
-                                                  package: 'khmer_fonts',
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: UnconstrainedBox(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'មើលទាំងអស់',
-                                      style: TextStyle(
-                                        fontFamily: KhmerFonts.kantumruy,
-                                        color: ColorTheme.title,
-                                        fontSize: 15,
-                                        package: 'khmer_fonts',
-                                      ),
-                                    ),
-                                    Icon(
-                                      IconDataTheme.seeAll,
-                                      color: ColorTheme.title,
-                                    )
-                                  ],
-                                ),
-                              )),
-                        ),
+                        ...buildNewAudioBook(context),
+                        buildSeeAllNewAudioBookButton(),
                         SizedBox(
                           height: 20,
                         )
@@ -837,6 +325,565 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Container buildPopularAuthor() {
+    return Container(
+      height: 180,
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
+            child: Container(
+              margin: EdgeInsets.only(left: 10, right: 5, bottom: 10),
+              width: 270,
+              decoration: BoxDecoration(color: ColorTheme.white, boxShadow: [
+                BoxShadow(
+                    color: ColorTheme.title.withOpacity(0.3),
+                    blurRadius: 7,
+                    offset: Offset(5, 7),
+                    spreadRadius: 2),
+              ]),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Stack(
+                      children: [
+                        Container(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        bookAuthors[index].imgPath))),
+                          ),
+                        ),
+                        Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Container(
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    color: index == 0
+                                        ? ColorTheme.title
+                                        : ColorTheme.bg),
+                                child: Icon(
+                                  index == 0
+                                      ? IconDataTheme.bookmarkSave
+                                      : IconDataTheme.bookmarkUnSave,
+                                  color: index == 0
+                                      ? ColorTheme.bottomBar
+                                      : ColorTheme.title,
+                                )))
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            bookAuthors[index].name,
+                            style: TextStyle(
+                              fontFamily: KhmerFonts.koulen,
+                              color: ColorTheme.black,
+                              fontSize: textThemeData(context)
+                                  .textTheme
+                                  .headline6!
+                                  .fontSize,
+                              package: 'khmer_fonts',
+                            ),
+                          ),
+                          Text(
+                            'ថ្ងៃ ខែ ឆ្នាំ កំណើត: ០១ មករា ១៩៨៧',
+                            style: TextStyle(
+                              fontFamily: KhmerFonts.kantumruy,
+                              color: ColorTheme.title,
+                              fontSize: 13,
+                              package: 'khmer_fonts',
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            'ខ្ញុំបាទឈ្មោះ ${bookAuthors[index].name} សព្វថ្ងៃនេះខ្ញុំមានអាយុ ១០០ ឆ្នាំ',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontFamily: KhmerFonts.content,
+                              color: ColorTheme.title,
+                              fontSize: 13,
+                              package: 'khmer_fonts',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+        itemCount: bookAuthors.length,
+      ),
+    );
+  }
+
+  Align buildSeeAllNewAudioBookButton() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: TextButton(
+          onPressed: () {},
+          style: ButtonStyle(
+              overlayColor:
+                  MaterialStateProperty.resolveWith((states) => ColorTheme.bg)),
+          child: UnconstrainedBox(
+            child: Row(
+              children: [
+                Text(
+                  'មើលទាំងអស់',
+                  style: TextStyle(
+                      fontFamily: KhmerFonts.kantumruy,
+                      color: ColorTheme.title,
+                      fontSize: 15,
+                      package: 'khmer_fonts',
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  IconDataTheme.seeAll,
+                  color: ColorTheme.title,
+                )
+              ],
+            ),
+          )),
+    );
+  }
+
+  List<Widget> buildNewAudioBook(BuildContext context) {
+    return List.generate(
+        audioBooks.length,
+        (index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Container(
+                    height: 75,
+                    width: 75,
+                    margin: EdgeInsets.only(left: 20),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(audioBooks[index].imgPath)),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 20,
+                              offset: Offset(10, 8),
+                              spreadRadius: 3),
+                          BoxShadow(
+                              color: Colors.white,
+                              blurRadius: 20,
+                              offset: Offset(-3, -4),
+                              spreadRadius: -2)
+                        ]),
+                    child: UnconstrainedBox(
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                            color: Colors.black87.withOpacity(0.5),
+                            shape: BoxShape.circle),
+                        child: UnconstrainedBox(
+                          child: Container(
+                            height: 10,
+                            width: 10,
+                            decoration: BoxDecoration(
+                                color: ColorTheme.white,
+                                shape: BoxShape.circle),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          audioBooks[index].title,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: KhmerFonts.dangrek,
+                            color: ColorTheme.title,
+                            fontSize: textThemeData(context)
+                                .textTheme
+                                .headline6!
+                                .fontSize,
+                            package: 'khmer_fonts',
+                          ),
+                        ),
+                        Text(
+                          'អ្នកនិពន្ធ: លោក លីវ៉ាត់',
+                          style: TextStyle(
+                            fontFamily: KhmerFonts.hanuman,
+                            color: ColorTheme.title,
+                            fontSize: 15,
+                            package: 'khmer_fonts',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              IconDataTheme.star,
+                              color: ColorTheme.title,
+                              size: 20,
+                            ),
+                            Text(
+                              '៤.៥',
+                              style: TextStyle(
+                                  fontFamily: KhmerFonts.battambang,
+                                  color: ColorTheme.title,
+                                  fontSize: 15,
+                                  package: 'khmer_fonts',
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'ពិន្ទុ',
+                              style: TextStyle(
+                                fontFamily: KhmerFonts.battambang,
+                                color: ColorTheme.title,
+                                fontSize: 15,
+                                package: 'khmer_fonts',
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              '១៥៦ នាក់',
+                              style: TextStyle(
+                                fontFamily: KhmerFonts.battambang,
+                                color: ColorTheme.title,
+                                fontSize: 15,
+                                package: 'khmer_fonts',
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              IconDataTheme.eye,
+                              size: 15,
+                              color: ColorTheme.title.withOpacity(0.7),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  Align buildSeeAllPopularAudioBookButton() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: TextButton(
+          onPressed: () {},
+          style: ButtonStyle(
+              overlayColor:
+                  MaterialStateProperty.resolveWith((states) => ColorTheme.bg)),
+          child: UnconstrainedBox(
+            child: Row(
+              children: [
+                Text(
+                  'មើលទាំងអស់',
+                  style: TextStyle(
+                      fontFamily: KhmerFonts.kantumruy,
+                      color: ColorTheme.title,
+                      fontSize: 15,
+                      package: 'khmer_fonts',
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  IconDataTheme.seeAll,
+                  color: ColorTheme.title,
+                )
+              ],
+            ),
+          )),
+    );
+  }
+
+  List<Widget> bulidPopularAudioBook(BuildContext context) {
+    return List.generate(
+        audioBooks.length,
+        (index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Container(
+                    height: 75,
+                    width: 75,
+                    margin: EdgeInsets.only(left: 20),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(audioBooks[index].imgPath)),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 20,
+                              offset: Offset(10, 8),
+                              spreadRadius: 3),
+                          BoxShadow(
+                              color: Colors.white,
+                              blurRadius: 20,
+                              offset: Offset(-3, -4),
+                              spreadRadius: -2)
+                        ]),
+                    child: UnconstrainedBox(
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                            color: Colors.black87.withOpacity(0.5),
+                            shape: BoxShape.circle),
+                        child: UnconstrainedBox(
+                          child: Container(
+                            height: 10,
+                            width: 10,
+                            decoration: BoxDecoration(
+                                color: ColorTheme.white,
+                                shape: BoxShape.circle),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          audioBooks[index].title,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: KhmerFonts.dangrek,
+                            color: ColorTheme.title,
+                            fontSize: textThemeData(context)
+                                .textTheme
+                                .headline6!
+                                .fontSize,
+                            package: 'khmer_fonts',
+                          ),
+                        ),
+                        Text(
+                          'អ្នកនិពន្ធ: លោក លីវ៉ាត់',
+                          style: TextStyle(
+                            fontFamily: KhmerFonts.hanuman,
+                            color: ColorTheme.title,
+                            fontSize: 15,
+                            package: 'khmer_fonts',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              IconDataTheme.star,
+                              color: ColorTheme.title,
+                              size: 20,
+                            ),
+                            Text(
+                              '៣.៧',
+                              style: TextStyle(
+                                  fontFamily: KhmerFonts.battambang,
+                                  color: ColorTheme.title,
+                                  fontSize: 15,
+                                  package: 'khmer_fonts',
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'ពិន្ទុ',
+                              style: TextStyle(
+                                fontFamily: KhmerFonts.battambang,
+                                color: ColorTheme.title,
+                                fontSize: 15,
+                                package: 'khmer_fonts',
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              '១០០ នាក់',
+                              style: TextStyle(
+                                fontFamily: KhmerFonts.battambang,
+                                color: ColorTheme.title,
+                                fontSize: 15,
+                                package: 'khmer_fonts',
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              IconDataTheme.eye,
+                              size: 15,
+                              color: ColorTheme.title.withOpacity(0.7),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  Align buildSeeAllPopularButton() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: TextButton(
+          onPressed: () {},
+          style: ButtonStyle(
+              overlayColor:
+                  MaterialStateProperty.resolveWith((states) => ColorTheme.bg)),
+          child: UnconstrainedBox(
+            child: Row(
+              children: [
+                Text(
+                  'មើលទាំងអស់',
+                  style: TextStyle(
+                      fontFamily: KhmerFonts.kantumruy,
+                      color: ColorTheme.title,
+                      fontSize: 15,
+                      package: 'khmer_fonts',
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  IconDataTheme.seeAll,
+                  color: ColorTheme.title,
+                )
+              ],
+            ),
+          )),
+    );
+  }
+
+  Container buildPopularTextBook() {
+    return Container(
+      height: 200,
+      padding: EdgeInsets.only(left: 10),
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.only(left: 10, top: 5, right: 5, bottom: 10),
+            width: 130,
+            decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      color: ColorTheme.title.withOpacity(0.3),
+                      blurRadius: 3,
+                      offset: Offset(5, 3),
+                      spreadRadius: 1),
+                ],
+                image: DecorationImage(
+                    fit: BoxFit.fill, image: AssetImage(books[index].pathImg))),
+          );
+        },
+        itemCount: audioBooks.length,
+      ),
+    );
+  }
+
+  Align buildSeeAllTextBookButton() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: TextButton(
+          style: ButtonStyle(
+              overlayColor:
+                  MaterialStateProperty.resolveWith((states) => ColorTheme.bg)),
+          onPressed: () {},
+          child: UnconstrainedBox(
+            child: Row(
+              children: [
+                Text(
+                  'មើលទាំងអស់',
+                  style: TextStyle(
+                      fontFamily: KhmerFonts.kantumruy,
+                      color: ColorTheme.title,
+                      fontSize: 15,
+                      package: 'khmer_fonts',
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  IconDataTheme.seeAll,
+                  color: ColorTheme.title,
+                )
+              ],
+            ),
+          )),
+    );
+  }
+
+  Container buildNewTextBook() {
+    return Container(
+      height: 200,
+      padding: EdgeInsets.only(left: 10),
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.only(left: 10, top: 5, right: 5, bottom: 10),
+            width: 130,
+            decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      color: ColorTheme.title.withOpacity(0.3),
+                      blurRadius: 3,
+                      offset: Offset(5, 3),
+                      spreadRadius: 1),
+                ],
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage(audioBooks[index].imgPath))),
+          );
+        },
+        itemCount: audioBooks.length,
       ),
     );
   }
@@ -897,8 +944,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: ColorTheme.title.withOpacity(0.5),
-                              blurRadius: 10,
+                              color: ColorTheme.title.withOpacity(0.4),
+                              blurRadius: 5,
                               offset: Offset(7, 10),
                               spreadRadius: 2),
                         ],
@@ -909,6 +956,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 index == books.length - 1
                     ? TextButton(
+                        style: ButtonStyle(
+                            overlayColor: MaterialStateProperty.resolveWith(
+                                (states) => ColorTheme.title.withOpacity(0.2))),
                         onPressed: () {},
                         child: UnconstrainedBox(
                           child: Row(
@@ -916,11 +966,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 'មើលទាំងអស់',
                                 style: TextStyle(
-                                  fontFamily: KhmerFonts.kantumruy,
-                                  color: ColorTheme.title,
-                                  fontSize: 15,
-                                  package: 'khmer_fonts',
-                                ),
+                                    fontFamily: KhmerFonts.kantumruy,
+                                    color: ColorTheme.title,
+                                    fontSize: 15,
+                                    package: 'khmer_fonts',
+                                    fontWeight: FontWeight.bold),
                               ),
                               Icon(
                                 IconDataTheme.seeAll,

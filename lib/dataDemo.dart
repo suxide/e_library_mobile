@@ -36,7 +36,7 @@ List<AudioBookModel> audioBooks = [
   AudioBookModel(
       title: 'មនុស្សពីរនាក់នៅផ្ទះជិតគ្នា', imgPath: 'assets/images/a1.jpg'),
   AudioBookModel(
-      title: 'ពាក្យសុភាសិតតំលៃ៣០តម្លឹង', imgPath: 'assets/images/a2.jpg'),
+      title: 'ពាក្យសុភាសិតតម្លៃ៣០តម្លឹង', imgPath: 'assets/images/a2.jpg'),
   AudioBookModel(title: 'បុរសចេះថ្នាំពិសពស់', imgPath: 'assets/images/a3.jpg'),
   AudioBookModel(
       title: 'ខ្លាចាញ់ប្រាជ្ញាគីង្គក់និងអណ្ដើក',

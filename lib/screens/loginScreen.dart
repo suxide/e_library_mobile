@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 import 'package:e_library_mobile/screens/homeScreen.dart';
 import 'package:e_library_mobile/screens/mainScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
@@ -48,15 +49,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorTheme.loginBg,
+      // backgroundColor: ColorTheme.loginBg,
       body: SafeArea(
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            Positioned(
-              top: 50,
-              left: -250,
-              child: buildBg(),
+            Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/images/login_bg.jpg'))),
+            ),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+              child: Container(),
             ),
             Align(
               alignment: Alignment.topCenter,
@@ -64,15 +70,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 170,
                 height: 170,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: ColorTheme.loginBg.withOpacity(0.9),
-                    boxShadow: [
-                      BoxShadow(
-                          color: ColorTheme.title.withOpacity(0.2),
-                          blurRadius: 15,
-                          offset: Offset(5, 5),
-                          spreadRadius: 2),
-                    ]),
+                    // shape: BoxShape.circle,
+                    // color: ColorTheme.white.withOpacity(0.2),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       color: ColorTheme.title.withOpacity(0.2),
+                    //       blurRadius: 15,
+                    //       offset: Offset(5, 5),
+                    //       spreadRadius: 2),
+                    // ]
+                    ),
                 child: UnconstrainedBox(
                   child: Container(
                     width: 130,
@@ -94,17 +101,17 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  //Bg
-  Container buildBg() {
-    return Container(
-      width: 700,
-      height: 350,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage('assets/images/login_bg.png'))),
-    );
-  }
+  // //Bg
+  // Container buildBg() {
+  //   return Container(
+  //     width: 700,
+  //     height: 350,
+  //     decoration: BoxDecoration(
+  //         image: DecorationImage(
+  //             fit: BoxFit.fill,
+  //             image: AssetImage('assets/images/login_bg.jpg'))),
+  //   );
+  // }
 
   //form
   Widget buildForm(BuildContext context) {
@@ -113,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
         margin: EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
             // color: ColorTheme.bg.withOpacity(0.97),
-            color: ColorTheme.loginBg.withOpacity(0.95),
+            color: Colors.grey.shade300.withOpacity(0.6),
             boxShadow: [
               // BoxShadow(
               //     color: ColorTheme.title.withOpacity(0.2),
@@ -134,9 +141,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           //title
                           Text(
-                            'Login'.toUpperCase(),
+                            'login'.toUpperCase(),
                             style: GoogleFonts.montserrat(
-                                color: ColorTheme.title.withOpacity(0.7),
+                                color: ColorTheme.title,
                                 fontSize: textThemeData(context)
                                     .textTheme
                                     .headline5!
