@@ -35,6 +35,8 @@ class IconDataTheme {
   static const IconData bookmarkSave = FlutterRemix.book_mark_fill;
   static const IconData bookmarkUnSave = FlutterRemix.book_mark_line;
   static const IconData download = FlutterRemix.download_cloud_2_line;
+  static const IconData seeAll = FlutterRemix.arrow_right_line;
+  static const IconData star = FlutterRemix.star_s_fill;
 }
 
 ThemeData textThemeData(BuildContext context) {

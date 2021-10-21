@@ -1,6 +1,6 @@
 import 'package:e_library_mobile/dataDemo.dart';
 import 'package:e_library_mobile/screens/bookDetailScreen.dart';
-import 'package:e_library_mobile/screens/loginScreen.dart';
+
 import 'package:e_library_mobile/screens/splashScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,8 +19,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  double _starVal = 0;
-  String _title = 'jflskdjflksdjflksdjfkjsdkfjsdfjksdjfkldsf';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -274,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Container(
-                  height: 500,
+                  constraints: BoxConstraints(minHeight: 500),
                   decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -292,11 +290,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 20),
+                        padding: const EdgeInsets.only(
+                          left: 30,
+                          top: 20,
+                        ),
                         child: Row(
                           children: [
                             Text(
-                              'សៀវភៅជាអក្សរ',
+                              'សៀវភៅជាអក្សរថ្មីៗ',
                               style: TextStyle(
                                 fontFamily: KhmerFonts.kantumruy,
                                 color: ColorTheme.title,
@@ -310,20 +311,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             SizedBox(
                               width: 10,
                             ),
-                            Icon(FlutterRemix.book_2_fill)
+                            Icon(FlutterRemix.book_2_fill),
                           ],
                         ),
                       ),
                       Container(
-                        height: 170,
+                        height: 200,
+                        padding: EdgeInsets.only(left: 10),
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Container(
-                              margin: EdgeInsets.only(left: 10, top: 5),
-                              width: 120,
+                              margin: EdgeInsets.only(
+                                  left: 10, top: 5, right: 5, bottom: 10),
+                              width: 130,
                               decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color:
+                                            ColorTheme.title.withOpacity(0.3),
+                                        blurRadius: 3,
+                                        offset: Offset(5, 2),
+                                        spreadRadius: 1),
+                                  ],
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
                                       image: AssetImage(
@@ -333,22 +344,48 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: audioBooks.length,
                         ),
                       ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                            onPressed: () {},
+                            child: UnconstrainedBox(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'មើលទាំងអស់',
+                                    style: TextStyle(
+                                      fontFamily: KhmerFonts.kantumruy,
+                                      color: ColorTheme.title,
+                                      fontSize: 15,
+                                      package: 'khmer_fonts',
+                                    ),
+                                  ),
+                                  Icon(
+                                    IconDataTheme.seeAll,
+                                    color: ColorTheme.title,
+                                  )
+                                ],
+                              ),
+                            )),
+                      ),
                       //Popular book
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 10),
+                        padding:
+                            const EdgeInsets.only(left: 30, top: 20, right: 20),
                         child: Row(
                           children: [
-                            Text(
-                              'សៀវភៅជាអក្សរដែលមានប្រជាប្រិយភាព',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontFamily: KhmerFonts.kantumruy,
-                                color: ColorTheme.title,
-                                fontSize: textThemeData(context)
-                                    .textTheme
-                                    .headline6!
-                                    .fontSize,
-                                package: 'khmer_fonts',
+                            Expanded(
+                              child: Text(
+                                'សៀវភៅជាអក្សរដែលមានប្រជាប្រិយភាព',
+                                style: TextStyle(
+                                  fontFamily: KhmerFonts.kantumruy,
+                                  color: ColorTheme.title,
+                                  fontSize: textThemeData(context)
+                                      .textTheme
+                                      .headline6!
+                                      .fontSize,
+                                  package: 'khmer_fonts',
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -358,16 +395,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
+
                       Container(
-                        height: 170,
+                        height: 200,
+                        padding: EdgeInsets.only(left: 10),
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Container(
-                              margin: EdgeInsets.only(left: 10, top: 5),
-                              width: 120,
+                              margin: EdgeInsets.only(
+                                  left: 10, top: 5, right: 5, bottom: 10),
+                              width: 130,
                               decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color:
+                                            ColorTheme.title.withOpacity(0.3),
+                                        blurRadius: 3,
+                                        offset: Offset(5, 2),
+                                        spreadRadius: 1),
+                                  ],
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
                                       image: AssetImage(books[index].pathImg))),
@@ -375,6 +423,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           itemCount: audioBooks.length,
                         ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                            onPressed: () {},
+                            child: UnconstrainedBox(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'មើលទាំងអស់',
+                                    style: TextStyle(
+                                      fontFamily: KhmerFonts.kantumruy,
+                                      color: ColorTheme.title,
+                                      fontSize: 15,
+                                      package: 'khmer_fonts',
+                                    ),
+                                  ),
+                                  Icon(
+                                    IconDataTheme.seeAll,
+                                    color: ColorTheme.title,
+                                  )
+                                ],
+                              ),
+                            )),
                       ),
                     ],
                   ),
@@ -397,27 +469,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         //new popular audio book
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 20, left: 30, bottom: 15),
+                              top: 20, left: 30, bottom: 15, right: 20),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'សៀវភៅជាសម្លេងថ្មីៗ',
-                                      style: TextStyle(
-                                        fontFamily: KhmerFonts.kantumruy,
-                                        color: ColorTheme.title,
-                                        fontSize: textThemeData(context)
-                                            .textTheme
-                                            .headline5!
-                                            .fontSize,
-                                        package: 'khmer_fonts',
-                                      ),
-                                    ),
-                                  ],
+                                child: Text(
+                                  'សៀវភៅជាសម្លេងដែលមានប្រជាប្រិយភាព',
+                                  style: TextStyle(
+                                    fontFamily: KhmerFonts.kantumruy,
+                                    color: ColorTheme.title,
+                                    fontSize: textThemeData(context)
+                                        .textTheme
+                                        .headline5!
+                                        .fontSize,
+                                    package: 'khmer_fonts',
+                                  ),
                                 ),
                               ),
                               Icon(
@@ -503,56 +571,115 @@ class _HomeScreenState extends State<HomeScreen> {
                                             style: TextStyle(
                                               fontFamily: KhmerFonts.hanuman,
                                               color: ColorTheme.title,
-                                              fontSize: textThemeData(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .fontSize,
+                                              fontSize: 15,
                                               package: 'khmer_fonts',
                                             ),
                                           ),
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          RatingStars(
-                                            starColor: ColorTheme.bottomBar,
-                                            valueLabelColor: ColorTheme.title,
-                                            maxValueVisibility: true,
-                                            valueLabelVisibility: true,
-                                            value: _starVal,
-                                            onValueChanged: (val) {
-                                              setState(() {
-                                                _starVal = val;
-                                              });
-                                            },
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Icon(
+                                                IconDataTheme.star,
+                                                color: ColorTheme.title,
+                                                size: 20,
+                                              ),
+                                              Text(
+                                                '៣',
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      KhmerFonts.battambang,
+                                                  color: ColorTheme.title,
+                                                  fontSize: 15,
+                                                  package: 'khmer_fonts',
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                'ដាក់ពិន្ទុ',
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      KhmerFonts.battambang,
+                                                  color: ColorTheme.title,
+                                                  fontSize: 15,
+                                                  package: 'khmer_fonts',
+                                                ),
+                                              ),
+                                              Text(
+                                                '១០០ នាក់បានអាន',
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      KhmerFonts.battambang,
+                                                  color: ColorTheme.title,
+                                                  fontSize: 15,
+                                                  package: 'khmer_fonts',
+                                                ),
+                                              ),
+                                            ],
                                           )
                                         ],
                                       )
                                     ],
                                   ),
                                 )),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: UnconstrainedBox(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'មើលទាំងអស់',
+                                      style: TextStyle(
+                                        fontFamily: KhmerFonts.kantumruy,
+                                        color: ColorTheme.title,
+                                        fontSize: 15,
+                                        package: 'khmer_fonts',
+                                      ),
+                                    ),
+                                    Icon(
+                                      IconDataTheme.seeAll,
+                                      color: ColorTheme.title,
+                                    )
+                                  ],
+                                ),
+                              )),
+                        ),
 
                         //popular audio book
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'សៀវភៅជាសម្លេងដែលមានប្រជាប្រិយភាព',
-                                style: TextStyle(
-                                  fontFamily: KhmerFonts.kantumruy,
-                                  color: ColorTheme.title,
-                                  fontSize: textThemeData(context)
-                                      .textTheme
-                                      .headline5!
-                                      .fontSize,
-                                  package: 'khmer_fonts',
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 30, right: 20, top: 20, bottom: 20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'សៀវភៅជាសម្លេងថ្មីៗ',
+                                  style: TextStyle(
+                                    fontFamily: KhmerFonts.kantumruy,
+                                    color: ColorTheme.title,
+                                    fontSize: textThemeData(context)
+                                        .textTheme
+                                        .headline5!
+                                        .fontSize,
+                                    package: 'khmer_fonts',
+                                  ),
                                 ),
                               ),
-                            ),
-                            Icon(
-                              IconDataTheme.headphone,
-                              color: ColorTheme.title,
-                            )
-                          ],
+                              Icon(
+                                IconDataTheme.headphone,
+                                color: ColorTheme.title,
+                              )
+                            ],
+                          ),
                         ),
 
                         ...List.generate(
@@ -631,35 +758,78 @@ class _HomeScreenState extends State<HomeScreen> {
                                             style: TextStyle(
                                               fontFamily: KhmerFonts.hanuman,
                                               color: ColorTheme.title,
-                                              fontSize: textThemeData(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .fontSize,
+                                              fontSize: 15,
                                               package: 'khmer_fonts',
                                             ),
                                           ),
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          RatingStars(
-                                            starColor: ColorTheme.bottomBar,
-                                            valueLabelColor: ColorTheme.title,
-                                            maxValueVisibility: true,
-                                            valueLabelVisibility: true,
-                                            value: _starVal,
-                                            onValueChanged: (val) {
-                                              setState(() {
-                                                _starVal = val;
-                                              });
-                                            },
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Icon(
+                                                IconDataTheme.star,
+                                                color: ColorTheme.title,
+                                                size: 20,
+                                              ),
+                                              Text(
+                                                '៤.៥',
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      KhmerFonts.battambang,
+                                                  color: ColorTheme.title,
+                                                  fontSize: 15,
+                                                  package: 'khmer_fonts',
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                'ដាក់ពិន្ទុ',
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      KhmerFonts.battambang,
+                                                  color: ColorTheme.title,
+                                                  fontSize: 15,
+                                                  package: 'khmer_fonts',
+                                                ),
+                                              ),
+                                            ],
                                           )
                                         ],
                                       )
                                     ],
                                   ),
                                 )),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: UnconstrainedBox(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'មើលទាំងអស់',
+                                      style: TextStyle(
+                                        fontFamily: KhmerFonts.kantumruy,
+                                        color: ColorTheme.title,
+                                        fontSize: 15,
+                                        package: 'khmer_fonts',
+                                      ),
+                                    ),
+                                    Icon(
+                                      IconDataTheme.seeAll,
+                                      color: ColorTheme.title,
+                                    )
+                                  ],
+                                ),
+                              )),
+                        ),
                         SizedBox(
-                          height: 50,
+                          height: 20,
                         )
                       ]),
                 ),
@@ -710,30 +880,57 @@ class _HomeScreenState extends State<HomeScreen> {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (context) => BookDetailScreen(
-                              index: index,
-                            )));
-              },
-              child: Container(
-                width: 140,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: ColorTheme.title.withOpacity(0.5),
-                          blurRadius: 10,
-                          offset: Offset(7, 10),
-                          spreadRadius: 2),
-                    ],
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage(books[index].pathImg))),
-              ),
+            padding: EdgeInsets.only(left: index == 0 ? 20 : 10, right: 10),
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => BookDetailScreen(
+                                  index: index,
+                                )));
+                  },
+                  child: Container(
+                    width: 140,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: ColorTheme.title.withOpacity(0.5),
+                              blurRadius: 10,
+                              offset: Offset(7, 10),
+                              spreadRadius: 2),
+                        ],
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(books[index].pathImg))),
+                  ),
+                ),
+                index == books.length - 1
+                    ? TextButton(
+                        onPressed: () {},
+                        child: UnconstrainedBox(
+                          child: Row(
+                            children: [
+                              Text(
+                                'មើលទាំងអស់',
+                                style: TextStyle(
+                                  fontFamily: KhmerFonts.kantumruy,
+                                  color: ColorTheme.title,
+                                  fontSize: 15,
+                                  package: 'khmer_fonts',
+                                ),
+                              ),
+                              Icon(
+                                IconDataTheme.seeAll,
+                                color: ColorTheme.title,
+                              )
+                            ],
+                          ),
+                        ))
+                    : Container()
+              ],
             ),
           );
         },

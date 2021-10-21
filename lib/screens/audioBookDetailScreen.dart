@@ -1,3 +1,4 @@
+import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/material.dart';
 
 class AudioBookDetailScreen extends StatefulWidget {
@@ -10,6 +11,11 @@ class AudioBookDetailScreen extends StatefulWidget {
 class _AudioBookDetailScreenState extends State<AudioBookDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: ColorTheme.bg,
+      body: CustomScrollView(
+        slivers: [],
+      ),
+    );
   }
 }
