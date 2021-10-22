@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       image: AssetImage('assets/images/login_bg.jpg'))),
             ),
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
               child: Container(),
             ),
             Align(
@@ -119,8 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
         height: 400,
         margin: EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
-            // color: ColorTheme.bg.withOpacity(0.97),
-            color: Colors.grey.shade300.withOpacity(0.6),
+            color: ColorTheme.bg,
+            // color: Colors.grey.shade300.withOpacity(0.7),
             boxShadow: [
               // BoxShadow(
               //     color: ColorTheme.title.withOpacity(0.2),
