@@ -1,5 +1,6 @@
 import 'package:e_library_mobile/dataDemo.dart';
 import 'package:e_library_mobile/screens/bookDetailScreen.dart';
+import 'package:e_library_mobile/screens/loginScreen.dart';
 
 import 'package:e_library_mobile/screens/splashScreen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
@@ -1039,7 +1040,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         onPressed: () {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => SplashScreen()));
+              context, MaterialPageRoute(builder: (context) => LoginScreen()));
         },
       ),
       actions: [

@@ -103,12 +103,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 50,
                       ),
+                      // buildLoginButton(context, false),
                       ElevatedButton(
                           style: ButtonStyle(
+                              overlayColor: MaterialStateProperty.resolveWith(
+                                  (states) => ColorTheme.bg),
                               backgroundColor:
                                   MaterialStateProperty.resolveWith(
                                       (states) => Colors.white)),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => HomeScreen()));
+                          },
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 20),
@@ -119,6 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       fontWeight: FontWeight.w600)),
                             ),
                           )),
+
                       SizedBox(
                         height: 30,
                       ),
@@ -304,6 +313,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   RoundedLoadingButton buildLoginButton(BuildContext context, bool _isSignUp) {
     return RoundedLoadingButton(
+      height: 60,
+      borderRadius: 7,
       controller: _loginButtonController,
       successColor: ColorTheme.title,
       color: ColorTheme.title,
@@ -314,7 +325,8 @@ class _LoginScreenState extends State<LoginScreen> {
               context, MaterialPageRoute(builder: (context) => MainScreen()));
         });
       },
-      child: Text(_isSignUp ? 'Sign Up'.toUpperCase() : 'Login'.toUpperCase()),
+      child:
+          Text(_isSignUp ? 'Sign Up'.toUpperCase() : 'Sign In'.toUpperCase()),
     );
   }
 
