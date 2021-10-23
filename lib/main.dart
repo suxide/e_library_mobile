@@ -1,3 +1,4 @@
+import 'package:e_library_mobile/screens/loginScreen.dart';
 import 'package:e_library_mobile/screens/mainScreen.dart';
 import 'package:e_library_mobile/screens/splashScreen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // theme: ThemeData(fontFamily: 'Kdamthmor'),
-      home: MainScreen(),
+      home: LoginScreen(),
     );
   }
 }

@@ -49,54 +49,139 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: ColorTheme.loginBg,
+      backgroundColor: Colors.grey[800],
       body: SafeArea(
         child: Stack(
-          clipBehavior: Clip.none,
           children: [
             Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
+                      colorFilter: ColorFilter.mode(
+                          Colors.grey.shade200, BlendMode.darken),
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/images/login_bg.jpg'))),
+                      image: AssetImage('assets/images/login_bg2.jpg'))),
             ),
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-              child: Container(),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 170,
-                height: 170,
-                decoration: BoxDecoration(
-                    // shape: BoxShape.circle,
-                    // color: ColorTheme.white.withOpacity(0.2),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //       color: ColorTheme.title.withOpacity(0.2),
-                    //       blurRadius: 15,
-                    //       offset: Offset(5, 5),
-                    //       spreadRadius: 2),
-                    // ]
-                    ),
-                child: UnconstrainedBox(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/logo.png'))),
-                  ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Welcome Back!',
+                        style: GoogleFonts.catamaran(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 30)),
+                  ],
                 ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: buildForm(context),
-            ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Form(
+                      child: Column(
+                    children: [
+                      TextFormField(
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                            labelText: 'Username',
+                            labelStyle:
+                                TextStyle(color: Colors.white.withOpacity(0.7)),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white.withOpacity(0.7)))),
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle:
+                                TextStyle(color: Colors.white.withOpacity(0.7)),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white.withOpacity(0.7)))),
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith(
+                                      (states) => Colors.white)),
+                          onPressed: () {},
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              child: Text('Sign In',
+                                  style: GoogleFonts.sourceSansPro(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600)),
+                            ),
+                          )),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        'Forgot your password?',
+                        style: GoogleFonts.openSans(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  )),
+                )
+              ],
+            )
           ],
         ),
+        // child: Stack(
+        //   clipBehavior: Clip.none,
+        //   children: [
+        //     Container(
+        //       decoration: BoxDecoration(
+        //           image: DecorationImage(
+        //               fit: BoxFit.cover,
+        //               image: AssetImage('assets/images/login_bg.jpg'))),
+        //     ),
+        //     BackdropFilter(
+        //       filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+        //       child: Container(),
+        //     ),
+        //     Align(
+        //       alignment: Alignment.topCenter,
+        //       child: Container(
+        //         width: 170,
+        //         height: 170,
+        //         decoration: BoxDecoration(
+        //             // shape: BoxShape.circle,
+        //             // color: ColorTheme.white.withOpacity(0.2),
+        //             // boxShadow: [
+        //             //   BoxShadow(
+        //             //       color: ColorTheme.title.withOpacity(0.2),
+        //             //       blurRadius: 15,
+        //             //       offset: Offset(5, 5),
+        //             //       spreadRadius: 2),
+        //             // ]
+        //             ),
+        //         child: UnconstrainedBox(
+        //           child: Container(
+        //             width: 130,
+        //             height: 130,
+        //             decoration: BoxDecoration(
+        //                 image: DecorationImage(
+        //                     image: AssetImage('assets/images/logo.png'))),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //     Align(
+        //       alignment: Alignment.center,
+        //       child: buildForm(context),
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
