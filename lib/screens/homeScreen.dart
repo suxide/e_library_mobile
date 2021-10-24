@@ -153,7 +153,92 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   //Author
-                  buildPopularAuthor()
+                  // buildPopularAuthor()
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    constraints: BoxConstraints(minHeight: 120),
+                    child: Container(
+                      height: 100,
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return index == bookAuthors.length - 1
+                              ? UnconstrainedBox(
+                                  child: TextButton(
+                                      style: ButtonStyle(
+                                          overlayColor:
+                                              MaterialStateProperty.resolveWith(
+                                                  (states) => ColorTheme.title
+                                                      .withOpacity(0.2))),
+                                      onPressed: () {},
+                                      child: UnconstrainedBox(
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'មើលទាំងអស់',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      KhmerFonts.kantumruy,
+                                                  color: ColorTheme.title,
+                                                  fontSize: 15,
+                                                  package: 'khmer_fonts',
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Icon(
+                                              IconDataTheme.seeAll,
+                                              color: ColorTheme.title,
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                )
+                              : Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          left: 15, right: 10, bottom: 10),
+                                      width: 80,
+                                      height: 80,
+                                      decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: ColorTheme.title
+                                                    .withOpacity(0.3),
+                                                blurRadius: 10,
+                                                offset: Offset(10, 8),
+                                                spreadRadius: 3),
+                                          ],
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              width: 2,
+                                              color: ColorTheme.white),
+                                          image: DecorationImage(
+                                              alignment: Alignment.bottomCenter,
+                                              fit: BoxFit.cover,
+                                              image: AssetImage(
+                                                  bookAuthors[index].imgPath))),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        bookAuthors[index].name,
+                                        style: TextStyle(
+                                          fontFamily: KhmerFonts.kantumruy,
+                                          color: ColorTheme.title,
+                                          fontSize: 16,
+                                          package: 'khmer_fonts',
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                );
+                        },
+                        itemCount: bookAuthors.length,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:khmer_fonts/khmer_fonts.dart';
+import 'package:blur/blur.dart';
 
 class BookDetailScreen extends StatefulWidget {
   final int index;
@@ -25,16 +26,34 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              backgroundColor: Colors.transparent,
-              expandedHeight: 300,
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        alignment: Alignment.topCenter,
-                        fit: BoxFit.cover,
-                        image: AssetImage(books[widget.index].pathImg))),
-              ),
-            ),
+                backgroundColor: Colors.transparent,
+                expandedHeight: 300,
+                title: Text('BookDetails'),
+                centerTitle: true,
+                flexibleSpace: Stack(children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(books[widget.index].pathImg))),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      child: Container(),
+                    ),
+                  ),
+                ])),
+            SliverFillRemaining(
+              child: Container(
+                  color: Colors.red,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 400,
+                        color: Colors.yellow,
+                      )
+                    ],
+                  )),
+            )
           ],
         ),
       ),

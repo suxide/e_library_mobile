@@ -3,8 +3,8 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 class ColorTheme {
   //Color
-  static const Color bg = Color(0xfff2e5d0);
-  static const Color appBar = Color(0xfff2e5d0);
+  static const Color bg = Color(0xfff3e5d0);
+  static const Color appBar = Color(0xfff3e5d0);
   static const Color black = Colors.black87;
   static const Color highLightColor = Colors.transparent;
   static const Color splashColor = Colors.white70;
