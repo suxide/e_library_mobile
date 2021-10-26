@@ -58,22 +58,33 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                         children: [
                           TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: ColorTheme.white),
                             decoration: InputDecoration(
-                                labelText: 'Username',
+                                labelText: 'គណនី',
                                 labelStyle: TextStyle(
-                                    color: Colors.white.withOpacity(0.7)),
+                                  fontFamily: KhmerFonts.kantumruy,
+                                  fontSize: 15,
+                                  color: Colors.white.withOpacity(0.7),
+                                  package: 'khmer_fonts',
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.white.withOpacity(0.7)))),
                           ),
                           TextFormField(
+                            style: TextStyle(color: ColorTheme.white),
                             obscureText: true,
-                            style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
-                                labelText: 'Password',
+                                suffixIcon: Icon(
+                                  Icons.visibility,
+                                  color: ColorTheme.white.withOpacity(0.7),
+                                ),
+                                labelText: 'លេខកូដ',
                                 labelStyle: TextStyle(
-                                    color: Colors.white.withOpacity(0.7)),
+                                  fontFamily: KhmerFonts.kantumruy,
+                                  fontSize: 15,
+                                  color: Colors.white.withOpacity(0.7),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.white.withOpacity(0.7)))),

@@ -244,35 +244,48 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             buildSliverHeight(20),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Container(
-                  constraints: BoxConstraints(minHeight: 500),
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: ColorTheme.title.withOpacity(0.3),
-                            blurRadius: 10,
-                            offset: Offset(5, 10),
-                            spreadRadius: 1),
-                      ],
-                      color: ColorTheme.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(SizeData.audioBookRadius),
-                          bottomLeft:
-                              Radius.circular(SizeData.audioBookRadius))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 30,
-                          top: 20,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              'សៀវភៅជាអក្សរថ្មីៗ',
+              child: Container(
+                constraints: BoxConstraints(minHeight: 500),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        top: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            'សៀវភៅជាអក្សរថ្មីៗ',
+                            style: TextStyle(
+                              fontFamily: KhmerFonts.kantumruy,
+                              color: ColorTheme.title,
+                              fontSize: textThemeData(context)
+                                  .textTheme
+                                  .headline6!
+                                  .fontSize,
+                              package: 'khmer_fonts',
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(FlutterRemix.book_2_fill),
+                        ],
+                      ),
+                    ),
+                    buildNewTextBook(),
+                    buildSeeAllTextBookButton(),
+                    //Popular book
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 20, right: 20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'សៀវភៅជាអក្សរដែលមានប្រជាប្រិយភាព',
                               style: TextStyle(
                                 fontFamily: KhmerFonts.kantumruy,
                                 color: ColorTheme.title,
@@ -283,47 +296,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 package: 'khmer_fonts',
                               ),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(FlutterRemix.book_2_fill),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(FlutterRemix.book_2_fill)
+                        ],
                       ),
-                      buildNewTextBook(),
-                      buildSeeAllTextBookButton(),
-                      //Popular book
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 30, top: 20, right: 20),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'សៀវភៅជាអក្សរដែលមានប្រជាប្រិយភាព',
-                                style: TextStyle(
-                                  fontFamily: KhmerFonts.kantumruy,
-                                  color: ColorTheme.title,
-                                  fontSize: textThemeData(context)
-                                      .textTheme
-                                      .headline6!
-                                      .fontSize,
-                                  package: 'khmer_fonts',
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(FlutterRemix.book_2_fill)
-                          ],
-                        ),
-                      ),
+                    ),
 
-                      buildPopularTextBook(),
-                      buildSeeAllPopularButton(),
-                    ],
-                  ),
+                    buildPopularTextBook(),
+                    buildSeeAllPopularButton(),
+                  ],
                 ),
               ),
             ),
@@ -890,7 +874,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Container buildPopularTextBook() {
     return Container(
       height: 200,
-      padding: EdgeInsets.only(left: 10),
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -948,7 +931,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Container buildNewTextBook() {
     return Container(
       height: 200,
-      padding: EdgeInsets.only(left: 10),
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,

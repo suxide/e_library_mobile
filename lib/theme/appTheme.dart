@@ -29,7 +29,7 @@ class IconDataTheme {
   static const IconData notification = FlutterRemix.notification_2_fill;
   static const IconData search = FlutterRemix.search_line;
   static const IconData headphone = FlutterRemix.headphone_fill;
-  static const IconData key = FlutterRemix.key_2_line;
+  static const IconData key = FlutterRemix.lock_2_line;
   static const IconData eye = FlutterRemix.eye_fill;
   static const IconData eye_off = FlutterRemix.eye_off_fill;
   static const IconData bookmarkSave = FlutterRemix.book_mark_fill;
