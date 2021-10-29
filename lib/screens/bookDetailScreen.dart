@@ -39,8 +39,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           image: AssetImage(books[widget.index].pathImg))),
                 ),
                 Container(
-                  height: 100,
-                  width: 100,
+                  height: 60,
+                  width: 60,
                   color: Colors.red,
                 )
               ]),

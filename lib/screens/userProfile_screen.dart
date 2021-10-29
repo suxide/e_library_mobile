@@ -20,7 +20,6 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
-  var body;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,18 +27,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorTheme.white,
-        leading: IconButton(
-          icon: Icon(
-            FlutterRemix.logout_circle_line,
-            color: ColorTheme.black,
-          ),
-          onPressed: () {
-            context.read<AppState>().user = null;
-            Navigator.of(context).pushReplacement(Transition(
-                child: LoadingResource(),
-                transitionEffect: TransitionEffect.BOTTOM_TO_TOP));
-          },
-        ),
+        leading: Container(),
         actions: [
           IconButton(
             icon: Icon(Icons.close, color: ColorTheme.black),
@@ -59,10 +47,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             //       String studentLogin = "/api/v1/school/students/student_token";
             //       http
             //           .get(Uri.parse(
-            //               '$uri$studentLogin?s_token=PP_EIS0030&pwd=0030'))
+            //               '$uri$studentLogin?s_token=PP_EIS0001&pwd=0001'))
             //           .then((http.Response response) {
-            //         print(response.body);
-            //         body = response.body;
+            //         // Map<String, dynamic> body = jsonDecode(response.body);
+
             //       });
             //     },
             //     child: Text("Show info")),
@@ -71,7 +59,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                        color: ColorTheme.title.withOpacity(0.5),
+                        color: ColorTheme.title.withOpacity(0.3),
                         blurRadius: 20,
                         spreadRadius: 5,
                         offset: Offset(1, 3))
@@ -86,6 +74,17 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     maxRadius: 40,
                     backgroundColor: ColorTheme.title,
                   ),
+                  // Container(
+                  //   height: 80,
+                  //   width: 80,
+                  //   decoration: BoxDecoration(
+                  //       image: DecorationImage(
+                  //           fit: BoxFit.cover,
+                  //           image: NetworkImage(
+                  //               widget.user.imageUrl[0]['url'].toString())),
+                  //       color: ColorTheme.title,
+                  //       shape: BoxShape.circle),
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -120,10 +119,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   backgroundColor:
                                       MaterialStateProperty.resolveWith(
                                           (states) => ColorTheme.bottomBar)),
-                              onPressed: () {},
+                              onPressed: () {
+                                print(widget.user.toJson());
+                              },
                               child: Text(
-                                'Edit profile',
-                                style: GoogleFonts.montserrat(fontSize: 15),
+                                'កែប្រែពត៌មានផ្ទាល់ខ្លួន',
+                                style: TextStyle(fontSize: 15),
                               ))),
                     ],
                   ),
@@ -133,12 +134,23 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 40),
               child: Text('content'.toUpperCase(),
-                  style: GoogleFonts.montserrat(fontSize: 17)),
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: ColorTheme.title)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: Container(
                 decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: ColorTheme.title.withOpacity(0.1),
+                          blurRadius: 5,
+                          spreadRadius: 1,
+                          offset: Offset(2, 3))
+                    ],
                     color: ColorTheme.white,
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
@@ -192,12 +204,23 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 20),
               child: Text('preferences'.toUpperCase(),
-                  style: GoogleFonts.montserrat(fontSize: 17)),
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: ColorTheme.title)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: Container(
                 decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: ColorTheme.title.withOpacity(0.1),
+                          blurRadius: 5,
+                          spreadRadius: 1,
+                          offset: Offset(2, 3))
+                    ],
                     color: ColorTheme.white,
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
@@ -214,10 +237,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             width: 10,
                           ),
                           Text('Language',
-                              style: GoogleFonts.montserrat(fontSize: 17)),
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat', fontSize: 17)),
                           Spacer(),
                           Text('English',
-                              style: GoogleFonts.montserrat(
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   color: ColorTheme.title.withOpacity(0.7))),
                           SizedBox(
@@ -241,8 +266,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text('Dark mode',
-                              style: GoogleFonts.montserrat(fontSize: 17)),
+                          Text('Dark Mode',
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat', fontSize: 17)),
                           Spacer(),
                           FlutterSwitch(
                               height: 27,
@@ -253,33 +279,56 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Row(
-                        children: [
-                          Icon(
-                            FlutterRemix.headphone_fill,
-                            color: ColorTheme.title.withOpacity(0.8),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text('Audio in background',
-                              style: GoogleFonts.montserrat(fontSize: 17)),
-                          Spacer(),
-                          FlutterSwitch(
-                              height: 27,
-                              width: 50,
-                              activeColor: ColorTheme.title,
-                              value: false,
-                              onToggle: (val) {}),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
+            // IconButton(
+            //   icon: Icon(
+            //     FlutterRemix.logout_circle_line,
+            //     color: ColorTheme.black,
+            //   ),
+            //   onPressed: () {
+            //     context.read<AppState>().user = null;
+            //     Navigator.of(context).pushReplacement(Transition(
+            //         child: LoadingResource(),
+            //         transitionEffect: TransitionEffect.BOTTOM_TO_TOP));
+            //   },
+            // ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                      style: ButtonStyle(
+                          overlayColor: MaterialStateProperty.resolveWith(
+                              (states) => ColorTheme.splashColor)),
+                      onPressed: () {
+                        context.read<AppState>().user = null;
+                        Navigator.of(context).pushReplacement(Transition(
+                            child: LoadingResource(),
+                            transitionEffect: TransitionEffect.BOTTOM_TO_TOP));
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            FlutterRemix.logout_box_r_line,
+                            color: ColorTheme.title,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Sign Out',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 18, color: ColorTheme.title),
+                          )
+                        ],
+                      )),
+                ],
+              ),
+            )
           ],
         ),
       ),

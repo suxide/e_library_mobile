@@ -37,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Map<String, dynamic> body = jsonDecode(response.body);
       if (body['code'] == 201) {
         UserModel user = UserModel.fromJson(body['data']);
+
         context.read<AppState>().setUser(user);
         _isLoadingVal.value = false;
       } else {

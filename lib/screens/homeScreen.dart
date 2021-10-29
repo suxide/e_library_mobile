@@ -848,8 +848,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: TextButton(
           onPressed: () {},
           style: ButtonStyle(
-              overlayColor:
-                  MaterialStateProperty.resolveWith((states) => ColorTheme.bg)),
+              overlayColor: MaterialStateProperty.resolveWith(
+                  (states) => ColorTheme.title.withOpacity(0.2))),
           child: UnconstrainedBox(
             child: Row(
               children: [
@@ -904,8 +904,8 @@ class _HomeScreenState extends State<HomeScreen> {
       alignment: Alignment.centerRight,
       child: TextButton(
           style: ButtonStyle(
-              overlayColor:
-                  MaterialStateProperty.resolveWith((states) => ColorTheme.bg)),
+              overlayColor: MaterialStateProperty.resolveWith(
+                  (states) => ColorTheme.title.withOpacity(0.2))),
           onPressed: () {},
           child: UnconstrainedBox(
             child: Row(
@@ -1078,27 +1078,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      // expandedHeight: 200,
-      // flexibleSpace: FlexibleSpaceBar(
-      //   background: Column(
-      //     children: [
-      //       Container(
-      //         child: Container(
-      //           width: 70,
-      //           height: 70,
-      //           decoration: BoxDecoration(
-      //               image: DecorationImage(
-      //                   fit: BoxFit.contain,
-      //                   image: AssetImage('assets/images/logo.png'))),
-      //         ),
-      //       ),
-      //       Text(
-      //         'E-library',
-      //         style: TextStyle(fontSize: 70),
-      //       ),
-      //     ],
-      //   ),
-      // ),
       leading: IconButton(
         splashColor: ColorTheme.splashColor,
         highlightColor: ColorTheme.highLightColor,
@@ -1107,10 +1086,6 @@ class _HomeScreenState extends State<HomeScreen> {
           color: ColorTheme.title,
         ),
         onPressed: () {
-          // context.read<AppState>().user = null;
-
-          // Navigator.pushReplacement(context,
-          //     MaterialPageRoute(builder: (context) => LoadingResource()));
           Navigator.of(context).push(Transition(
               child: UserProfileScreen(
                 user: widget.user,
