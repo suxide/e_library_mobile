@@ -1,18 +1,19 @@
 import 'package:e_library_mobile/dataDemo.dart';
+import 'package:e_library_mobile/models/user_model.dart';
 import 'package:e_library_mobile/screens/bookDetailScreen.dart';
-import 'package:e_library_mobile/screens/loginScreen.dart';
-
-import 'package:e_library_mobile/screens/splashScreen.dart';
+import 'package:e_library_mobile/screens/userProfile_screen.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:khmer_fonts/khmer_fonts.dart';
+import 'package:transition/transition.dart';
 
 class HomeScreen extends StatefulWidget {
+  final UserModel user;
   const HomeScreen({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -1106,8 +1107,15 @@ class _HomeScreenState extends State<HomeScreen> {
           color: ColorTheme.title,
         ),
         onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          // context.read<AppState>().user = null;
+
+          // Navigator.pushReplacement(context,
+          //     MaterialPageRoute(builder: (context) => LoadingResource()));
+          Navigator.of(context).push(Transition(
+              child: UserProfileScreen(
+                user: widget.user,
+              ),
+              transitionEffect: TransitionEffect.TOP_TO_BOTTOM));
         },
       ),
       actions: [

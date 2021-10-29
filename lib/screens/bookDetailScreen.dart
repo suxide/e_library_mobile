@@ -1,12 +1,9 @@
 import 'dart:ui';
-
 import 'package:e_library_mobile/dataDemo.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:khmer_fonts/khmer_fonts.dart';
 
 class BookDetailScreen extends StatefulWidget {
   final int index;
@@ -25,59 +22,72 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-                backgroundColor: Colors.transparent,
-                expandedHeight: 300,
-                title: Text('BookDetails'),
-                centerTitle: true,
-                flexibleSpace: Stack(children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(books[widget.index].pathImg))),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      child: Container(),
-                    ),
-                  ),
-                ])),
-            SliverFillRemaining(
-              child: Container(
+              leading: IconButton(
+                icon: Icon(CupertinoIcons.back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: Colors.transparent,
+              expandedHeight: 300,
+              centerTitle: true,
+              flexibleSpace: Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(books[widget.index].pathImg))),
+                ),
+                Container(
+                  height: 100,
+                  width: 100,
                   color: Colors.red,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 400,
-                        color: Colors.yellow,
-                      )
-                    ],
-                  )),
-            )
+                )
+              ]),
+            ),
+            SliverList(
+                delegate: SliverChildListDelegate([
+              Container(
+                decoration: BoxDecoration(
+                    color: ColorTheme.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(SizeData.audioBookRadius),
+                        topRight: Radius.circular(SizeData.audioBookRadius))),
+                // child: Column(
+                //   children: [
+                //     Stack(
+                //       clipBehavior: Clip.none,
+                //       alignment: Alignment.center,
+                //       children: [
+                //         Container(),
+                //         Positioned(
+                //           top: -160,
+                //           child: Container(
+                //             height: 200,
+                //             width: 140,
+                //             decoration: BoxDecoration(
+                //                 image: DecorationImage(
+                //                     fit: BoxFit.fill,
+                //                     image: AssetImage(
+                //                         books[widget.index].pathImg))),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //     SizedBox(
+                //       height: 70,
+                //     ),
+                //     Container(
+                //       child: Text(audioBooks[widget.index].title),
+                //     )
+                //   ],
+                // ),
+              ),
+            ])),
+            SliverFillRemaining()
           ],
         ),
       ),
     );
-  }
-}
-
-class AppBarDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-  final double max, min;
-  AppBarDelegate({required this.child, required this.min, required this.max});
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
-  }
-
-  @override
-  double get maxExtent => max;
-
-  @override
-  double get minExtent => min;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
   }
 }

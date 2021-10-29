@@ -1,10 +1,13 @@
-import 'package:e_library_mobile/screens/loginScreen.dart';
-import 'package:e_library_mobile/screens/mainScreen.dart';
-import 'package:e_library_mobile/screens/splashScreen.dart';
+import 'package:e_library_mobile/appState.dart';
+import 'package:e_library_mobile/loading_resource.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => AppState())],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -19,8 +22,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: ThemeData(fontFamily: 'Kdamthmor'),
-      home: LoginScreen(),
+      theme: ThemeData(fontFamily: 'Kantumruy'),
+      home: LoadingResource(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:e_library_mobile/dataDemo.dart';
+import 'package:e_library_mobile/models/user_model.dart';
 import 'package:e_library_mobile/screens/audioBookScreen.dart';
 import 'package:e_library_mobile/screens/bookmarkScreen.dart';
 import 'package:e_library_mobile/screens/homeScreen.dart';
@@ -8,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final UserModel user;
+  const MainScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -43,7 +45,9 @@ class _MainScreenState extends State<MainScreen> {
             controller: _pageController,
             physics: NeverScrollableScrollPhysics(),
             children: [
-              HomeScreen(),
+              HomeScreen(
+                user: widget.user,
+              ),
               SearchScreen(),
               BookmarkScreen(),
               AudioBookScreen()

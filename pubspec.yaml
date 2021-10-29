@@ -24,15 +24,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_rating_stars: ^1.0.3+4
   flutter_remix: ^0.0.3
+  flutter_spinkit: ^5.1.0
+  flutter_switch: ^0.3.2
   google_fonts: ^2.1.0
+  http: null
   khmer_fonts: ^0.0.6
   provider: ^6.0.1
-  rounded_loading_button: ^2.0.9
+  rxdart: ^0.27.2
   sliding_clipped_nav_bar: ^1.0.3
-  splash_screen_view: ^3.0.0
-  blur: ^3.0.0
+  transition: ^2.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +65,9 @@ flutter:
     - family: Kdamthmor
       fonts:
         - asset: assets/fonts/KdamThmor-Regular.ttf
+    - family: Kantumruy
+      fonts:
+        - asset: assets/fonts/Kantumruy-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

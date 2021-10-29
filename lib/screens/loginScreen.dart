@@ -1,13 +1,15 @@
-import 'dart:async';
+import 'dart:convert';
 import 'dart:ui';
-import 'package:e_library_mobile/screens/homeScreen.dart';
-import 'package:e_library_mobile/screens/mainScreen.dart';
+import 'package:e_library_mobile/appState.dart';
+import 'package:e_library_mobile/models/user_model.dart';
 import 'package:e_library_mobile/theme/appTheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:khmer_fonts/khmer_fonts.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,6 +19,42 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  ValueNotifier<bool> isObscureVal = ValueNotifier<bool>(true);
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _userNameController = TextEditingController();
+  TextEditingController _pwdController = TextEditingController();
+  BehaviorSubject<bool> _behaviorSubjectValidate = BehaviorSubject<bool>();
+  ValueNotifier<bool> _isLoadingVal = ValueNotifier<bool>(false);
+  //login function
+  handleLogin() {
+    String uri = "https://www.schoolmgm.online";
+    String userLogin = "/api/v1/school/students/student_token";
+    String id = _userNameController.text.trim();
+    String pwd = _pwdController.text.trim();
+    http
+        .get(Uri.parse('$uri$userLogin?s_token=$id&pwd=$pwd'))
+        .then((http.Response response) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      if (body['code'] == 201) {
+        UserModel user = UserModel.fromJson(body['data']);
+        context.read<AppState>().setUser(user);
+        _isLoadingVal.value = false;
+      } else {
+        _isLoadingVal.value = false;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Wrong username or password'),
+          duration: Duration(milliseconds: 700),
+        ));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _behaviorSubjectValidate.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: 350,
+                height: 400,
                 child: ListView(
                   children: [
                     Row(
@@ -55,79 +93,168 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child: Form(
+                          key: _formKey,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: () {
+                            bool _isValidate =
+                                _formKey.currentState!.validate();
+                            _behaviorSubjectValidate.add(_isValidate);
+                          },
                           child: Column(
-                        children: [
-                          TextFormField(
-                            style: TextStyle(color: ColorTheme.white),
-                            decoration: InputDecoration(
-                                labelText: 'គណនី',
-                                labelStyle: TextStyle(
-                                  fontFamily: KhmerFonts.kantumruy,
-                                  fontSize: 15,
-                                  color: Colors.white.withOpacity(0.7),
-                                  package: 'khmer_fonts',
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white.withOpacity(0.7)))),
-                          ),
-                          TextFormField(
-                            style: TextStyle(color: ColorTheme.white),
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                suffixIcon: Icon(
-                                  Icons.visibility,
-                                  color: ColorTheme.white.withOpacity(0.7),
-                                ),
-                                labelText: 'លេខកូដ',
-                                labelStyle: TextStyle(
-                                  fontFamily: KhmerFonts.kantumruy,
-                                  fontSize: 15,
-                                  color: Colors.white.withOpacity(0.7),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white.withOpacity(0.7)))),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          // buildLoginButton(context, false),
-                          ElevatedButton(
-                              style: ButtonStyle(
-                                  overlayColor:
-                                      MaterialStateProperty.resolveWith(
-                                          (states) => ColorTheme.bg),
-                                  backgroundColor:
-                                      MaterialStateProperty.resolveWith(
-                                          (states) => Colors.white)),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (context) => HomeScreen()));
-                              },
-                              child: Center(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 20),
-                                  child: Text('Sign In',
-                                      style: GoogleFonts.sourceSansPro(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600)),
-                                ),
-                              )),
+                            children: [
+                              //username textfield
+                              TextFormField(
+                                controller: _userNameController,
+                                validator: (val) {
+                                  if (val!.isEmpty) {
+                                    return '\u26A0 ត្រូវកាបំពេញឈ្មោះគណនី';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                style: TextStyle(color: ColorTheme.white),
+                                decoration: InputDecoration(
+                                    labelText: 'គណនី',
+                                    labelStyle: TextStyle(
+                                      fontFamily: 'Kantumruy',
+                                      fontSize: 15,
+                                      color: Colors.white.withOpacity(0.7),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.white
+                                                .withOpacity(0.7)))),
+                              ),
+                              //Password textfield
+                              ValueListenableBuilder(
+                                builder: (BuildContext context, bool isObscure,
+                                    Widget? child) {
+                                  return TextFormField(
+                                    controller: _pwdController,
+                                    validator: (val) {
+                                      if (val!.isEmpty) {
+                                        return '\u26A0 ត្រូវកាបំពេញលេខសម្ងាត់';
+                                      } else if (val.isNotEmpty &&
+                                          val.length < 4) {
+                                        return '\u26A0 លេខសម្ងាត់ត្រូវតែលើសពី ៤ ខ្ទង់';
+                                      }
+                                    },
+                                    style: TextStyle(color: ColorTheme.white),
+                                    obscureText: isObscure,
+                                    decoration: InputDecoration(
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                              isObscure
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: ColorTheme.white
+                                                  .withOpacity(0.7)),
+                                          onPressed: () {
+                                            isObscureVal.value =
+                                                !isObscureVal.value;
+                                          },
+                                        ),
+                                        labelText: 'លេខសម្ងាត់',
+                                        labelStyle: TextStyle(
+                                          fontFamily: 'Kantumruy',
+                                          fontSize: 15,
+                                          color: Colors.white.withOpacity(0.7),
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.white
+                                                    .withOpacity(0.7)))),
+                                  );
+                                },
+                                valueListenable: isObscureVal,
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
 
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            'Forgot your password?',
-                            style: GoogleFonts.openSans(color: Colors.white),
-                          ),
-                        ],
-                      )),
+                              //login button
+                              StreamBuilder<bool>(
+                                  initialData: false,
+                                  stream: _behaviorSubjectValidate,
+                                  builder: (context,
+                                      AsyncSnapshot<dynamic> snapshot) {
+                                    bool _isValid = snapshot.data;
+                                    return ValueListenableBuilder(
+                                      builder: (BuildContext context,
+                                          bool _isLoading, Widget? child) {
+                                        return ElevatedButton(
+                                            style: ButtonStyle(
+                                                overlayColor:
+                                                    MaterialStateProperty
+                                                        .resolveWith((states) =>
+                                                            ColorTheme.bg),
+                                                backgroundColor:
+                                                    MaterialStateProperty
+                                                        .resolveWith((states) =>
+                                                            _isValid
+                                                                ? ColorTheme
+                                                                    .white
+                                                                : Colors.grey)),
+                                            onPressed: _isValid
+                                                ? () {
+                                                    _isLoadingVal.value = true;
+
+                                                    Future.delayed(
+                                                        Duration(
+                                                            milliseconds: 500),
+                                                        () {
+                                                      handleLogin();
+                                                    });
+                                                  }
+                                                : null,
+                                            child: Center(
+                                              child: _isLoading
+                                                  ? Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 18),
+                                                      child: SpinKitRing(
+                                                        color: Colors.black,
+                                                        lineWidth: 2,
+                                                        size: 26,
+                                                      ),
+                                                    )
+                                                  : Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 17),
+                                                      child: Text(
+                                                        'ចូល',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'Kantumruy',
+                                                            fontSize: 15,
+                                                            color: ColorTheme
+                                                                .black),
+                                                      ),
+                                                    ),
+                                            ));
+                                      },
+                                      valueListenable: _isLoadingVal,
+                                    );
+                                  }),
+
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'ភ្លេចលេខសម្ងាត់?',
+                                  style: TextStyle(
+                                    fontFamily: 'Kantumruy',
+                                    fontSize: 15,
+                                    color: Colors.white.withOpacity(0.7),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )),
                     )
                   ],
                 ),
